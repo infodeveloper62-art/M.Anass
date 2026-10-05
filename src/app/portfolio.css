@@ -1,0 +1,16 @@
+/* Portfolio specific styling and micro-interactions */
+
+:host {
+  display: block;
+}
+
+/* Ensure smooth scrolling within component */
+html {
+  scroll-behavior: smooth;
+}
+
+/* SVG Text path styling for rotating circular badge */
+#textPathHero {
+  font-family: var(--font-sans);
+  font-weight: 800;
+}

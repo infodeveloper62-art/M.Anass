@@ -1,0 +1,401 @@
+<div class="min-h-screen bg-slate-950 text-slate-100 font-sans selection:bg-[#F9B900] selection:text-[#214F36]">
+
+  <!-- Top Announcement / Return to Portfolio Navigation Bar -->
+  <div class="bg-[#214F36] text-white px-4 py-2.5 text-xs font-semibold flex items-center justify-between border-b border-emerald-800">
+    <div class="flex items-center gap-2 max-w-7xl mx-auto w-full justify-between">
+      <div class="flex items-center gap-2">
+        <span class="w-2 h-2 rounded-full bg-[#F9B900] animate-ping"></span>
+        <span>Live Interactive Project Demo: Apex Business Solutions (Developed by M. Anass)</span>
+      </div>
+      <button
+        (click)="goBackToPortfolio()"
+        type="button"
+        class="bg-white text-[#214F36] hover:bg-[#F9B900] hover:text-[#214F36] px-3.5 py-1 rounded-full font-bold flex items-center gap-1.5 transition-colors cursor-pointer text-xs"
+      >
+        <mat-icon class="text-sm">arrow_back</mat-icon>
+        <span>Back to M. Anass Portfolio</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Corporate Header -->
+  <header class="sticky top-0 z-40 bg-slate-900/90 backdrop-blur-md border-b border-slate-800 px-4 sm:px-8 py-4">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-500 to-[#214F36] text-white flex items-center justify-center font-extrabold text-lg shadow-md">
+          ▲
+        </div>
+        <div>
+          <span class="text-lg font-bold tracking-tight text-white">Apex Business</span>
+          <span class="text-xs text-emerald-400 font-medium block -mt-1">Corporate Strategy &amp; Tech</span>
+        </div>
+      </div>
+
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
+        <button (click)="scrollTo('solutions')" type="button" class="hover:text-white transition-colors cursor-pointer">Solutions</button>
+        <button (click)="scrollTo('case-studies')" type="button" class="hover:text-white transition-colors cursor-pointer">Case Studies</button>
+        <button (click)="scrollTo('estimator')" type="button" class="hover:text-white transition-colors cursor-pointer">Project Estimator</button>
+        <button (click)="scrollTo('contact-section')" type="button" class="hover:text-white transition-colors cursor-pointer">Book Consultation</button>
+      </nav>
+
+      <div class="flex items-center gap-3">
+        <button
+          (click)="scrollTo('contact-section')"
+          type="button"
+          class="bg-[#214F36] hover:bg-emerald-700 text-white font-bold text-xs sm:text-sm px-5 py-2.5 rounded-xl transition-all shadow-md flex items-center gap-1.5 cursor-pointer"
+        >
+          <span>Get in Touch</span>
+          <mat-icon class="text-sm">arrow_forward</mat-icon>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="py-20 md:py-28 px-4 sm:px-8 max-w-7xl mx-auto relative overflow-hidden">
+    <div class="max-w-3xl">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-semibold mb-6">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+        <span>Enterprise Consulting &amp; Modern Digital Engineering</span>
+      </div>
+
+      <h1 class="text-4xl sm:text-6xl font-extrabold text-white tracking-tight leading-[1.15] mb-6">
+        Accelerating Enterprise Growth with <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-[#F9B900]">Intelligent Systems</span>
+      </h1>
+
+      <p class="text-base sm:text-xl text-slate-300 leading-relaxed mb-8">
+        We partner with forward-thinking enterprises and ambitious founders to transform legacy workflows, architect modern cloud web platforms, and maximize commercial revenue.
+      </p>
+
+      <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 mb-12">
+        <button
+          (click)="scrollTo('contact-section')"
+          type="button"
+          class="bg-gradient-to-r from-emerald-600 to-[#214F36] hover:from-emerald-500 hover:to-[#2a6646] text-white px-8 py-4 rounded-xl font-bold text-sm tracking-wide shadow-xl flex items-center justify-center gap-2 cursor-pointer transition-all"
+        >
+          <span>Schedule Strategic Audit</span>
+          <mat-icon class="text-sm">calendar_today</mat-icon>
+        </button>
+
+        <button
+          (click)="scrollTo('case-studies')"
+          type="button"
+          class="bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-700 px-7 py-4 rounded-xl font-bold text-sm tracking-wide flex items-center justify-center gap-2 cursor-pointer transition-all"
+        >
+          <span>Explore Case Studies</span>
+          <mat-icon class="text-sm">arrow_downward</mat-icon>
+        </button>
+      </div>
+
+      <!-- Trust Metrics -->
+      <div class="grid grid-cols-3 gap-6 pt-8 border-t border-slate-800">
+        <div>
+          <div class="text-3xl sm:text-4xl font-extrabold text-white tabular-nums">$45M+</div>
+          <div class="text-xs sm:text-sm text-slate-400 mt-1">Client Revenue Generated</div>
+        </div>
+        <div>
+          <div class="text-3xl sm:text-4xl font-extrabold text-emerald-400 tabular-nums">99.8%</div>
+          <div class="text-xs sm:text-sm text-slate-400 mt-1">SLA Project Delivery</div>
+        </div>
+        <div>
+          <div class="text-3xl sm:text-4xl font-extrabold text-[#F9B900] tabular-nums">120+</div>
+          <div class="text-xs sm:text-sm text-slate-400 mt-1">Enterprise Implementations</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Solutions Section -->
+  <section id="solutions" class="py-20 bg-slate-900/60 border-y border-slate-800 px-4 sm:px-8">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center max-w-2xl mx-auto mb-14">
+        <span class="text-xs font-bold text-emerald-400 uppercase tracking-widest block mb-2">Our Capabilities</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mb-3">Enterprise Solutions Engineered for Scale</h2>
+        <p class="text-sm sm:text-base text-slate-400">High-impact technical advisory and rapid digital deployment</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        @for (service of services; track service.title) {
+          <div class="bg-slate-900 rounded-2xl p-7 border border-slate-800 hover:border-emerald-500/50 transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between group">
+            <div>
+              <div class="w-12 h-12 rounded-xl bg-emerald-950 text-emerald-400 flex items-center justify-center mb-5 group-hover:bg-[#214F36] group-hover:text-white transition-colors">
+                <mat-icon class="text-2xl">{{ service.icon }}</mat-icon>
+              </div>
+              <h3 class="text-lg font-bold text-white mb-2">{{ service.title }}</h3>
+              <p class="text-xs sm:text-sm text-slate-400 leading-relaxed mb-6">{{ service.desc }}</p>
+            </div>
+
+            <div class="pt-4 border-t border-slate-800">
+              <span class="text-[11px] font-bold text-slate-500 uppercase tracking-wider block mb-2">Key Deliverables</span>
+              <ul class="space-y-1.5">
+                @for (item of service.deliverables; track item) {
+                  <li class="text-xs text-slate-300 flex items-center gap-1.5">
+                    <mat-icon class="text-emerald-500 text-sm">check</mat-icon>
+                    <span>{{ item }}</span>
+                  </li>
+                }
+              </ul>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Case Studies Section -->
+  <section id="case-studies" class="py-20 px-4 sm:px-8 max-w-7xl mx-auto">
+    <div class="text-center max-w-2xl mx-auto mb-14">
+      <span class="text-xs font-bold text-[#F9B900] uppercase tracking-widest block mb-2">Proven Track Record</span>
+      <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mb-3">Enterprise Case Studies</h2>
+      <p class="text-sm sm:text-base text-slate-400">Measurable commercial impact delivered across diverse industries</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      @for (study of caseStudies; track study.client) {
+        <div class="bg-slate-900 rounded-3xl p-8 border border-slate-800 flex flex-col justify-between hover:border-slate-700 transition-colors">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <span class="text-xs font-bold px-3 py-1 rounded-full bg-emerald-950 text-emerald-400 border border-emerald-800">
+                {{ study.tag }}
+              </span>
+              <span class="text-xs text-slate-400">{{ study.duration }}</span>
+            </div>
+
+            <h3 class="text-xl font-bold text-white mb-2">{{ study.client }}</h3>
+            <h4 class="text-sm font-semibold text-emerald-400 mb-4">{{ study.title }}</h4>
+            <p class="text-xs sm:text-sm text-slate-400 leading-relaxed mb-6">{{ study.desc }}</p>
+          </div>
+
+          <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 flex items-center justify-between">
+            <span class="text-xs text-slate-400">Key Outcome:</span>
+            <span class="text-sm font-extrabold text-[#F9B900]">{{ study.result }}</span>
+          </div>
+        </div>
+      }
+    </div>
+  </section>
+
+  <!-- Interactive Project Cost Estimator -->
+  <section id="estimator" class="py-20 bg-slate-900/60 border-t border-slate-800 px-4 sm:px-8">
+    <div class="max-w-4xl mx-auto bg-slate-900 rounded-3xl p-8 sm:p-12 border border-slate-800 shadow-2xl">
+      <div class="text-center mb-8">
+        <span class="text-xs font-bold text-emerald-400 uppercase tracking-widest block mb-2">Self-Service Calculator</span>
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-white mb-2">Interactive Project Estimator</h2>
+        <p class="text-xs sm:text-sm text-slate-400">Select project scope parameters to calculate approximate investment range</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-8">
+        <div>
+          <div class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">Scope of Project</div>
+          <div class="space-y-2">
+            <button
+              (click)="updateEstimate(1500, selectedTimeline())"
+              type="button"
+              class="w-full text-left p-3.5 rounded-xl border text-xs font-semibold flex items-center justify-between transition-colors cursor-pointer"
+              [class.bg-emerald-950]="selectedServiceType() === 1500"
+              [class.border-emerald-500]="selectedServiceType() === 1500"
+              [class.text-white]="selectedServiceType() === 1500"
+              [class.bg-slate-950]="selectedServiceType() !== 1500"
+              [class.border-slate-800]="selectedServiceType() !== 1500"
+              [class.text-slate-400]="selectedServiceType() !== 1500"
+            >
+              <span>MVP / Landing Page &amp; Branding</span>
+              <span>$1,500</span>
+            </button>
+            <button
+              (click)="updateEstimate(2500, selectedTimeline())"
+              type="button"
+              class="w-full text-left p-3.5 rounded-xl border text-xs font-semibold flex items-center justify-between transition-colors cursor-pointer"
+              [class.bg-emerald-950]="selectedServiceType() === 2500"
+              [class.border-emerald-500]="selectedServiceType() === 2500"
+              [class.text-white]="selectedServiceType() === 2500"
+              [class.bg-slate-950]="selectedServiceType() !== 2500"
+              [class.border-slate-800]="selectedServiceType() !== 2500"
+              [class.text-slate-400]="selectedServiceType() !== 2500"
+            >
+              <span>Custom Enterprise Web Platform</span>
+              <span>$2,500</span>
+            </button>
+            <button
+              (click)="updateEstimate(4500, selectedTimeline())"
+              type="button"
+              class="w-full text-left p-3.5 rounded-xl border text-xs font-semibold flex items-center justify-between transition-colors cursor-pointer"
+              [class.bg-emerald-950]="selectedServiceType() === 4500"
+              [class.border-emerald-500]="selectedServiceType() === 4500"
+              [class.text-white]="selectedServiceType() === 4500"
+              [class.bg-slate-950]="selectedServiceType() !== 4500"
+              [class.border-slate-800]="selectedServiceType() !== 4500"
+              [class.text-slate-400]="selectedServiceType() !== 4500"
+            >
+              <span>Full-Stack Cloud &amp; BI Modernization</span>
+              <span>$4,500</span>
+            </button>
+          </div>
+        </div>
+
+        <div>
+          <div class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">Delivery Speed / Priority</div>
+          <div class="space-y-2">
+            <button
+              (click)="updateEstimate(selectedServiceType(), 1)"
+              type="button"
+              class="w-full text-left p-3.5 rounded-xl border text-xs font-semibold flex items-center justify-between transition-colors cursor-pointer"
+              [class.bg-emerald-950]="selectedTimeline() === 1"
+              [class.border-emerald-500]="selectedTimeline() === 1"
+              [class.text-white]="selectedTimeline() === 1"
+              [class.bg-slate-950]="selectedTimeline() !== 1"
+              [class.border-slate-800]="selectedTimeline() !== 1"
+              [class.text-slate-400]="selectedTimeline() !== 1"
+            >
+              <span>Standard Timeline (3–4 Weeks)</span>
+              <span>1.0x</span>
+            </button>
+            <button
+              (click)="updateEstimate(selectedServiceType(), 1.25)"
+              type="button"
+              class="w-full text-left p-3.5 rounded-xl border text-xs font-semibold flex items-center justify-between transition-colors cursor-pointer"
+              [class.bg-emerald-950]="selectedTimeline() === 1.25"
+              [class.border-emerald-500]="selectedTimeline() === 1.25"
+              [class.text-white]="selectedTimeline() === 1.25"
+              [class.bg-slate-950]="selectedTimeline() !== 1.25"
+              [class.border-slate-800]="selectedTimeline() !== 1.25"
+              [class.text-slate-400]="selectedTimeline() !== 1.25"
+            >
+              <span>Priority Sprint (10–14 Days)</span>
+              <span>1.25x</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-6 rounded-2xl bg-gradient-to-r from-emerald-950 to-slate-950 border border-emerald-800/60 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div>
+          <span class="text-xs text-slate-400 block">Calculated Estimated Investment:</span>
+          <span class="text-3xl font-extrabold text-[#F9B900] tabular-nums">${{ estimatedCost() }} USD</span>
+        </div>
+        <button
+          (click)="scrollTo('contact-section')"
+          type="button"
+          class="bg-[#F9B900] hover:bg-amber-400 text-slate-950 font-extrabold text-xs px-6 py-3 rounded-xl transition-colors cursor-pointer"
+        >
+          Book Consultation at this Rate
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Consultation Booking Form -->
+  <section id="contact-section" class="py-20 px-4 sm:px-8 max-w-4xl mx-auto">
+    <div class="bg-slate-900 rounded-3xl p-8 sm:p-12 border border-slate-800 shadow-2xl">
+      <div class="text-center mb-8">
+        <span class="text-xs font-bold text-emerald-400 uppercase tracking-widest block mb-2">Direct Engagement</span>
+        <h2 class="text-3xl font-extrabold text-white mb-2">Book an Executive Consultation</h2>
+        <p class="text-xs sm:text-sm text-slate-400">Receive a tailored implementation proposal within 24 business hours.</p>
+      </div>
+
+      @if (consultationSuccess()) {
+        <div class="mb-6 p-4 rounded-xl bg-emerald-950 border border-emerald-600 text-emerald-200 text-xs sm:text-sm flex items-center gap-3">
+          <mat-icon class="text-emerald-400">check_circle</mat-icon>
+          <div>
+            <div class="font-bold">Consultation Request Received!</div>
+            <div>Our senior technical team will reach out with your NDA and project scope draft.</div>
+          </div>
+        </div>
+      }
+
+      <form [formGroup]="consultationForm" (ngSubmit)="submitConsultation()" class="space-y-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label for="compName" class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">Company Name *</label>
+            <input
+              id="compName"
+              type="text"
+              formControlName="companyName"
+              placeholder="Apex Global Ltd"
+              class="w-full px-4 py-3 rounded-xl bg-slate-950 border border-slate-800 text-sm text-white focus:outline-none focus:border-emerald-500"
+            />
+          </div>
+          <div>
+            <label for="contactP" class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">Contact Person *</label>
+            <input
+              id="contactP"
+              type="text"
+              formControlName="contactPerson"
+              placeholder="Jane Miller"
+              class="w-full px-4 py-3 rounded-xl bg-slate-950 border border-slate-800 text-sm text-white focus:outline-none focus:border-emerald-500"
+            />
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label for="wEmail" class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">Corporate Email *</label>
+            <input
+              id="wEmail"
+              type="email"
+              formControlName="workEmail"
+              placeholder="jane@apex.com"
+              class="w-full px-4 py-3 rounded-xl bg-slate-950 border border-slate-800 text-sm text-white focus:outline-none focus:border-emerald-500"
+            />
+          </div>
+          <div>
+            <label for="serviceReq" class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">Target Service</label>
+            <select
+              id="serviceReq"
+              formControlName="serviceRequired"
+              class="w-full px-4 py-3 rounded-xl bg-slate-950 border border-slate-800 text-sm text-white focus:outline-none focus:border-emerald-500"
+            >
+              <option value="Enterprise Strategy & Growth">Enterprise Strategy &amp; Growth</option>
+              <option value="Cloud & System Modernization">Cloud &amp; System Modernization</option>
+              <option value="Custom Web & Product Engineering">Custom Web &amp; Product Engineering</option>
+              <option value="Data Analytics & Business BI">Data Analytics &amp; Business BI</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label for="brief" class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">Project Brief &amp; Objectives *</label>
+          <textarea
+            id="brief"
+            formControlName="projectBrief"
+            rows="4"
+            placeholder="Describe your current bottleneck, target metrics, or system requirements..."
+            class="w-full px-4 py-3 rounded-xl bg-slate-950 border border-slate-800 text-sm text-white focus:outline-none focus:border-emerald-500 resize-none"
+          ></textarea>
+        </div>
+
+        <button
+          type="submit"
+          [disabled]="isSubmitting()"
+          class="w-full bg-[#214F36] hover:bg-emerald-700 text-white font-bold py-3.5 rounded-xl transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-lg disabled:opacity-60"
+        >
+          @if (isSubmitting()) {
+            <span class="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+            <span>Processing Consultation Request...</span>
+          } @else {
+            <span>Submit Proposal Request</span>
+            <mat-icon class="text-sm">send</mat-icon>
+          }
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Corporate Footer -->
+  <footer class="bg-slate-950 border-t border-slate-800 py-10 px-4 sm:px-8 text-center text-xs text-slate-500">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div>
+        © 2026 Apex Business Solutions. Designed &amp; Developed by <strong class="text-white">M. Anass</strong>.
+      </div>
+      <button
+        (click)="goBackToPortfolio()"
+        type="button"
+        class="text-emerald-400 hover:underline flex items-center gap-1 cursor-pointer font-semibold"
+      >
+        <span>Return to M. Anass Portfolio Home</span>
+        <mat-icon class="text-sm">arrow_forward</mat-icon>
+      </button>
+    </div>
+  </footer>
+
+</div>

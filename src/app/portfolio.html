@@ -1,0 +1,1576 @@
+<div class="min-h-screen bg-white text-[#171717] font-sans selection:bg-[#F9B900] selection:text-[#214F36] relative">
+
+  <!-- ======================== FLOATING NAVBAR ======================== -->
+  <header class="fixed top-4 left-0 right-0 z-50 px-4 sm:px-6 md:px-8 max-w-7xl mx-auto transition-all duration-300">
+    <div
+      class="bg-[#214F36] text-white px-5 sm:px-7 py-3 rounded-full flex items-center justify-between shadow-xl border border-emerald-900/40 backdrop-blur-md"
+    >
+      <!-- Brand Logo -->
+      <a
+        (click)="scrollTo('home')"
+        href="javascript:void(0)"
+        class="flex items-center gap-2.5 sm:gap-3 group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#F9B900] rounded-full"
+      >
+        <span
+          class="w-9 h-9 rounded-full bg-[#F9B900] text-[#171717] font-extrabold flex items-center justify-center text-lg shadow-sm group-hover:scale-105 transition-transform shrink-0"
+        >
+          A
+        </span>
+        <span class="text-lg font-bold tracking-tight text-white group-hover:text-[#F9B900] transition-colors">
+          M.Anass
+        </span>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <nav class="hidden lg:flex items-center gap-7 text-sm font-medium text-emerald-100/90">
+        <a
+          (click)="scrollTo('home')"
+          href="javascript:void(0)"
+          class="transition-colors hover:text-[#F9B900]"
+          [class.text-[#F9B900]]="activeSection() === 'home'"
+          [class.font-semibold]="activeSection() === 'home'"
+        >
+          Home
+        </a>
+        <a
+          (click)="scrollTo('services')"
+          href="javascript:void(0)"
+          class="transition-colors hover:text-[#F9B900]"
+          [class.text-[#F9B900]]="activeSection() === 'services'"
+          [class.font-semibold]="activeSection() === 'services'"
+        >
+          Services
+        </a>
+        <a
+          (click)="scrollTo('about')"
+          href="javascript:void(0)"
+          class="transition-colors hover:text-[#F9B900]"
+          [class.text-[#F9B900]]="activeSection() === 'about'"
+          [class.font-semibold]="activeSection() === 'about'"
+        >
+          About
+        </a>
+        <a
+          (click)="scrollTo('skills')"
+          href="javascript:void(0)"
+          class="transition-colors hover:text-[#F9B900]"
+          [class.text-[#F9B900]]="activeSection() === 'skills'"
+          [class.font-semibold]="activeSection() === 'skills'"
+        >
+          Skills
+        </a>
+        <a
+          (click)="scrollTo('tools')"
+          href="javascript:void(0)"
+          class="transition-colors hover:text-[#F9B900]"
+          [class.text-[#F9B900]]="activeSection() === 'tools'"
+          [class.font-semibold]="activeSection() === 'tools'"
+        >
+          Tools
+        </a>
+        <a
+          (click)="scrollTo('projects')"
+          href="javascript:void(0)"
+          class="transition-colors hover:text-[#F9B900]"
+          [class.text-[#F9B900]]="activeSection() === 'projects'"
+          [class.font-semibold]="activeSection() === 'projects'"
+        >
+          Projects
+        </a>
+        <a
+          (click)="scrollTo('testimonials')"
+          href="javascript:void(0)"
+          class="transition-colors hover:text-[#F9B900]"
+          [class.text-[#F9B900]]="activeSection() === 'testimonials'"
+          [class.font-semibold]="activeSection() === 'testimonials'"
+        >
+          Testimonials
+        </a>
+        <a
+          (click)="scrollTo('contact')"
+          href="javascript:void(0)"
+          class="transition-colors hover:text-[#F9B900]"
+          [class.text-[#F9B900]]="activeSection() === 'contact'"
+          [class.font-semibold]="activeSection() === 'contact'"
+        >
+          Contact
+        </a>
+      </nav>
+
+      <!-- Right Action CTA -->
+      <div class="hidden sm:flex items-center gap-3">
+        <button
+          (click)="scrollTo('contact')"
+          type="button"
+          class="bg-white text-[#171717] hover:bg-[#F9B900] hover:text-[#214F36] px-5 py-2 rounded-full text-xs font-bold tracking-wide transition-all duration-200 shadow-md hover:shadow-lg flex items-center gap-1.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#F9B900]"
+        >
+          <span>Contact Me</span>
+          <mat-icon class="text-base leading-none w-4 h-4 flex items-center justify-center">north_east</mat-icon>
+        </button>
+      </div>
+
+      <!-- Mobile Hamburger Button -->
+      <button
+        (click)="toggleMobileMenu()"
+        type="button"
+        class="lg:hidden w-9 h-9 rounded-full bg-emerald-950 flex items-center justify-center text-white hover:text-[#F9B900] transition-colors focus:outline-none"
+        aria-label="Toggle navigation menu"
+      >
+        <mat-icon class="text-xl leading-none">
+          @if (mobileMenuOpen()) {
+            close
+          } @else {
+            menu
+          }
+        </mat-icon>
+      </button>
+    </div>
+
+    <!-- Mobile Drawer Menu -->
+    @if (mobileMenuOpen()) {
+      <div
+        class="lg:hidden mt-2 bg-[#214F36] border border-emerald-900/80 rounded-3xl p-6 shadow-2xl text-white flex flex-col gap-4 animate-fade-in"
+      >
+        <nav class="flex flex-col gap-3 font-medium text-emerald-100">
+          <a
+            (click)="scrollTo('home')"
+            href="javascript:void(0)"
+            class="py-2 px-3 rounded-xl hover:bg-emerald-900/60 hover:text-[#F9B900] transition-colors flex items-center justify-between"
+          >
+            <span>Home</span>
+            <mat-icon class="text-sm">chevron_right</mat-icon>
+          </a>
+          <a
+            (click)="scrollTo('services')"
+            href="javascript:void(0)"
+            class="py-2 px-3 rounded-xl hover:bg-emerald-900/60 hover:text-[#F9B900] transition-colors flex items-center justify-between"
+          >
+            <span>Services</span>
+            <mat-icon class="text-sm">chevron_right</mat-icon>
+          </a>
+          <a
+            (click)="scrollTo('about')"
+            href="javascript:void(0)"
+            class="py-2 px-3 rounded-xl hover:bg-emerald-900/60 hover:text-[#F9B900] transition-colors flex items-center justify-between"
+          >
+            <span>About Me</span>
+            <mat-icon class="text-sm">chevron_right</mat-icon>
+          </a>
+          <a
+            (click)="scrollTo('skills')"
+            href="javascript:void(0)"
+            class="py-2 px-3 rounded-xl hover:bg-emerald-900/60 hover:text-[#F9B900] transition-colors flex items-center justify-between"
+          >
+            <span>Skills</span>
+            <mat-icon class="text-sm">chevron_right</mat-icon>
+          </a>
+          <a
+            (click)="scrollTo('tools')"
+            href="javascript:void(0)"
+            class="py-2 px-3 rounded-xl hover:bg-emerald-900/60 hover:text-[#F9B900] transition-colors flex items-center justify-between"
+          >
+            <span>Tools</span>
+            <mat-icon class="text-sm">chevron_right</mat-icon>
+          </a>
+          <a
+            (click)="scrollTo('projects')"
+            href="javascript:void(0)"
+            class="py-2 px-3 rounded-xl hover:bg-emerald-900/60 hover:text-[#F9B900] transition-colors flex items-center justify-between"
+          >
+            <span>Featured Projects</span>
+            <mat-icon class="text-sm">chevron_right</mat-icon>
+          </a>
+          <a
+            (click)="scrollTo('testimonials')"
+            href="javascript:void(0)"
+            class="py-2 px-3 rounded-xl hover:bg-emerald-900/60 hover:text-[#F9B900] transition-colors flex items-center justify-between"
+          >
+            <span>Testimonials</span>
+            <mat-icon class="text-sm">chevron_right</mat-icon>
+          </a>
+          <a
+            (click)="scrollTo('contact')"
+            href="javascript:void(0)"
+            class="py-2 px-3 rounded-xl hover:bg-emerald-900/60 hover:text-[#F9B900] transition-colors flex items-center justify-between"
+          >
+            <span>Contact</span>
+            <mat-icon class="text-sm">chevron_right</mat-icon>
+          </a>
+        </nav>
+        <button
+          (click)="scrollTo('contact')"
+          type="button"
+          class="w-full bg-[#F9B900] text-[#214F36] py-3 rounded-full font-bold text-center flex items-center justify-center gap-2 hover:bg-amber-400 transition-colors shadow-lg"
+        >
+          <span>Contact Me</span>
+          <mat-icon class="text-sm">north_east</mat-icon>
+        </button>
+      </div>
+    }
+  </header>
+
+  <!-- ======================== HERO SECTION ======================== -->
+  <section id="home" class="pt-32 pb-16 md:pt-40 md:pb-24 px-4 sm:px-8 max-w-7xl mx-auto overflow-hidden">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+
+      <!-- Left Column: Intro & Headline -->
+      <div class="lg:col-span-6 flex flex-col items-start z-10">
+
+        <!-- Decorative "Hello There!" Tag matching reference -->
+        <div class="relative mb-6 inline-block">
+          <div
+            class="px-4 py-1.5 rounded-lg border-2 border-[#171717] bg-white text-xs font-extrabold tracking-wider text-[#171717] flex items-center gap-2 shadow-sm"
+          >
+            <span class="w-1.5 h-1.5 rounded-full bg-[#F9B900]"></span>
+            <span>Hello There!</span>
+          </div>
+          <!-- Decorative bracket notches -->
+          <div class="absolute -top-1 -left-1 w-2 h-2 border-t-2 border-l-2 border-[#F9B900]"></div>
+          <div class="absolute -bottom-1 -right-1 w-2 h-2 border-b-2 border-r-2 border-[#F9B900]"></div>
+        </div>
+
+        <!-- Main Heading with Golden Highlights -->
+        <h1 class="text-3xl sm:text-5xl md:text-6xl font-extrabold text-[#171717] tracking-tight leading-[1.18] sm:leading-[1.15] mb-5 sm:mb-6">
+          I'm <span class="text-[#F9B900]">M. Anass</span>,<br />
+          <span class="text-[#F9B900]">Web Developer</span><br />
+          Based in Pakistan.
+        </h1>
+
+        <!-- Subtitle Description -->
+        <p class="text-sm sm:text-lg text-neutral-600 leading-relaxed mb-6 sm:mb-8 max-w-xl">
+          I'm a passionate Web Developer who creates modern, responsive and high-performance websites for businesses, brands and individuals.
+        </p>
+
+        <!-- CTA Buttons (Full width on mobile, inline on desktop) -->
+        <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-5 mb-8 w-full sm:w-auto">
+          <!-- View My Projects Button with Play/Arrow Icon -->
+          <button
+            (click)="scrollTo('projects')"
+            type="button"
+            class="group bg-[#214F36] hover:bg-[#163625] text-white px-7 py-3.5 rounded-full font-bold text-sm tracking-wide transition-all duration-200 shadow-lg hover:shadow-xl flex items-center justify-center gap-3"
+          >
+            <span>View My Projects</span>
+            <span
+              class="w-7 h-7 rounded-full bg-white text-[#214F36] flex items-center justify-center group-hover:bg-[#F9B900] group-hover:text-[#214F36] transition-colors shrink-0"
+            >
+              <mat-icon class="text-base leading-none">play_arrow</mat-icon>
+            </span>
+          </button>
+
+          <!-- Hire Me Button -->
+          <button
+            (click)="scrollTo('contact')"
+            type="button"
+            class="bg-white hover:bg-neutral-50 text-[#171717] border-2 border-[#171717] px-8 py-3.5 rounded-full font-bold text-sm tracking-wide transition-all duration-200 hover:border-[#214F36] hover:text-[#214F36] shadow-sm flex items-center justify-center gap-2"
+          >
+            <span>Hire Me</span>
+            <mat-icon class="text-sm">arrow_forward</mat-icon>
+          </button>
+        </div>
+
+        <!-- Quick Trust Pill -->
+        <div class="flex items-center gap-2.5 sm:gap-3 text-xs font-semibold text-neutral-600 bg-neutral-100/90 px-3.5 py-2 rounded-full border border-neutral-200 max-w-full">
+          <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse shrink-0"></span>
+          <span class="truncate">Available for Freelance Projects & Remote Roles</span>
+        </div>
+      </div>
+
+      <!-- Right Column: Visual Portrait with Golden Shape & Floating Badges -->
+      <div class="lg:col-span-6 relative flex justify-center items-center mt-4 lg:mt-0 w-full overflow-hidden sm:overflow-visible">
+
+        <!-- Outer Decorative Golden Disc / Circle -->
+        <div class="relative w-[280px] h-[280px] xs:w-[320px] xs:h-[320px] sm:w-[420px] sm:h-[420px] md:w-[480px] md:h-[480px] flex items-center justify-center mx-auto">
+
+          <!-- Golden Background Shape -->
+          <div
+            class="absolute inset-3 sm:inset-4 rounded-full bg-[#F9B900] shadow-2xl transition-transform duration-700 hover:scale-105"
+          ></div>
+
+          <!-- Secondary Decorative Ring -->
+          <div class="absolute inset-0 rounded-full border-2 border-dashed border-[#214F36]/20 pointer-events-none"></div>
+
+          <!-- Rotating Circular Decorative Badge "WEB • DESIGN • CODE" -->
+          <div
+            class="absolute -top-2 right-1 sm:top-2 sm:right-6 w-20 h-20 sm:w-28 sm:h-28 rounded-full bg-[#214F36] text-white p-1.5 sm:p-2 flex items-center justify-center shadow-xl z-20 animate-spin-slow"
+          >
+            <svg class="w-full h-full" viewBox="0 0 100 100">
+              <path
+                id="textPathHero"
+                d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0"
+                fill="none"
+              ></path>
+              <text font-size="10.5" font-weight="bold" fill="#F9B900" letter-spacing="1.5">
+                <textPath href="#textPathHero">
+                  WEB • DESIGN • CODE • DEV •
+                </textPath>
+              </text>
+            </svg>
+            <div class="absolute inset-0 flex items-center justify-center">
+              <mat-icon class="text-white text-xs sm:text-base">code</mat-icon>
+            </div>
+          </div>
+
+          <!-- Professional Developer Portrait Image -->
+          <div class="relative z-10 w-[240px] h-[310px] xs:w-[270px] xs:h-[350px] sm:w-[350px] sm:h-[440px] md:w-[390px] md:h-[480px] overflow-hidden rounded-b-[40px] flex items-end justify-center pointer-events-none">
+            <img
+              src="/assets/images/developer_hero_portrait_1791100913727.jpg"
+              alt="M. Anass - Web Developer"
+              referrerpolicy="no-referrer"
+              class="w-full h-full object-cover object-top drop-shadow-2xl"
+            />
+          </div>
+
+          <!-- Floating Label 1: Top-Left "Web Developer" -->
+          <div
+            class="absolute top-4 left-1 sm:top-12 sm:left-4 z-20 bg-[#214F36] text-white px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-[10px] sm:text-xs font-bold shadow-lg flex items-center gap-1.5 sm:gap-2 border border-emerald-700/50 animate-float"
+          >
+            <span class="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-[#F9B900]"></span>
+            <span>Web Developer</span>
+          </div>
+
+          <!-- Floating Label 2: Mid-Left "Frontend Developer" -->
+          <div
+            class="absolute bottom-10 left-1 sm:bottom-16 sm:left-0 z-20 bg-[#F9B900] text-[#214F36] px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-[10px] sm:text-xs font-extrabold shadow-lg flex items-center gap-1.5 sm:gap-2 animate-float-delayed"
+          >
+            <mat-icon class="text-xs sm:text-sm">terminal</mat-icon>
+            <span>Frontend Developer</span>
+          </div>
+
+          <!-- Floating Label 3: Bottom-Right "Responsive Design" -->
+          <div
+            class="absolute bottom-4 right-1 sm:bottom-10 sm:right-6 z-20 bg-white text-[#171717] px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-[10px] sm:text-xs font-bold shadow-lg border border-neutral-200 flex items-center gap-1.5 sm:gap-2 animate-float"
+          >
+            <mat-icon class="text-xs sm:text-sm text-[#214F36]">devices</mat-icon>
+            <span>Responsive Design</span>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== MOVING SERVICE BAR (MARQUEE) ======================== -->
+  <section class="w-full bg-[#F9B900] py-4 sm:py-5 overflow-hidden shadow-inner border-y border-amber-500/30">
+    <div class="animate-marquee whitespace-nowrap flex items-center gap-8 text-[#171717] font-extrabold text-base sm:text-xl uppercase tracking-wider select-none">
+      <div class="flex items-center gap-8 shrink-0">
+        <span>Web Development</span>
+        <span class="text-[#214F36] text-2xl leading-none">✻</span>
+        <span>Website Design</span>
+        <span class="text-[#214F36] text-2xl leading-none">✻</span>
+        <span>Frontend Development</span>
+        <span class="text-[#214F36] text-2xl leading-none">✻</span>
+        <span>Responsive Websites</span>
+        <span class="text-[#214F36] text-2xl leading-none">✻</span>
+        <span>E-Commerce</span>
+        <span class="text-[#214F36] text-2xl leading-none">✻</span>
+        <span>UI Implementation</span>
+        <span class="text-[#214F36] text-2xl leading-none">✻</span>
+        <span>Landing Pages</span>
+        <span class="text-[#214F36] text-2xl leading-none">✻</span>
+      </div>
+      <!-- Duplicate for infinite seamless marquee loop -->
+      <div class="flex items-center gap-8 shrink-0" aria-hidden="true">
+        <span>Web Development</span>
+        <span class="text-[#214F36] text-2xl leading-none">✻</span>
+        <span>Website Design</span>
+        <span class="text-[#214F36] text-2xl leading-none">✻</span>
+        <span>Frontend Development</span>
+        <span class="text-[#214F36] text-2xl leading-none">✻</span>
+        <span>Responsive Websites</span>
+        <span class="text-[#214F36] text-2xl leading-none">✻</span>
+        <span>E-Commerce</span>
+        <span class="text-[#214F36] text-2xl leading-none">✻</span>
+        <span>UI Implementation</span>
+        <span class="text-[#214F36] text-2xl leading-none">✻</span>
+        <span>Landing Pages</span>
+        <span class="text-[#214F36] text-2xl leading-none">✻</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== SERVICES SECTION ======================== -->
+  <section id="services" class="py-20 md:py-28 px-4 sm:px-8 max-w-7xl mx-auto">
+    <!-- Header with label & "View All Services" button -->
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14">
+      <div>
+        <span class="text-xs font-bold text-[#F9B900] uppercase tracking-widest block mb-2">
+          — Services
+        </span>
+        <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#171717] tracking-tight">
+          Services <span class="text-[#F9B900]">I Provide</span>
+        </h2>
+      </div>
+
+      <button
+        (click)="scrollTo('contact')"
+        type="button"
+        class="self-start md:self-auto bg-[#214F36] hover:bg-[#163625] text-white px-6 py-2.5 rounded-full text-xs font-bold tracking-wide transition-all duration-200 flex items-center gap-2 shadow-md hover:shadow-lg group"
+      >
+        <span>View All Services</span>
+        <span class="w-6 h-6 rounded-full bg-[#F9B900] text-[#214F36] flex items-center justify-center group-hover:translate-x-0.5 transition-transform">
+          <mat-icon class="text-sm">arrow_forward</mat-icon>
+        </span>
+      </button>
+    </div>
+
+    <!-- 4 Rounded Service Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      @for (service of services; track service.id) {
+        <div
+          class="bg-[#F5F5F5] hover:bg-white rounded-3xl p-7 border border-neutral-200/80 transition-all duration-300 hover:shadow-xl hover:-translate-y-1.5 flex flex-col justify-between group"
+        >
+          <div>
+            <!-- Card Icon -->
+            <div
+              class="w-14 h-14 rounded-2xl bg-white group-hover:bg-[#214F36] text-[#214F36] group-hover:text-[#F9B900] flex items-center justify-center shadow-sm mb-6 transition-colors duration-300"
+            >
+              <mat-icon class="text-2xl">{{ service.icon }}</mat-icon>
+            </div>
+
+            <!-- Title -->
+            <h3 class="text-xl font-bold text-[#171717] mb-3 group-hover:text-[#214F36] transition-colors">
+              {{ service.title }}
+            </h3>
+
+            <!-- Description -->
+            <p class="text-sm text-neutral-600 leading-relaxed mb-6">
+              {{ service.shortDesc }}
+            </p>
+          </div>
+
+          <!-- Learn More Link -->
+          <button
+            (click)="openServiceModal(service)"
+            type="button"
+            class="text-xs font-bold text-[#171717] hover:text-[#214F36] flex items-center gap-1.5 pt-4 border-t border-neutral-200/60 group-hover:border-[#214F36]/20 transition-colors"
+          >
+            <span>Learn more</span>
+            <mat-icon class="text-sm transition-transform group-hover:translate-x-1">arrow_forward</mat-icon>
+          </button>
+        </div>
+      }
+    </div>
+  </section>
+
+  <!-- ======================== ABOUT ME SECTION (DARK GREEN) ======================== -->
+  <section id="about" class="py-12 px-3 sm:px-6 md:px-8 max-w-7xl mx-auto">
+    <div
+      class="bg-[#214F36] text-white rounded-[2.5rem] py-16 sm:py-20 px-6 sm:px-12 md:px-16 shadow-2xl relative overflow-hidden"
+    >
+      <!-- Subtle Decorative Background Glow -->
+      <div class="absolute -right-20 -bottom-20 w-96 h-96 rounded-full bg-emerald-700/20 blur-3xl pointer-events-none"></div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+
+        <!-- Left Side: Circular Golden Image & Orbiting Tags -->
+        <div class="lg:col-span-5 flex justify-center items-center relative">
+          <div class="relative w-[280px] h-[280px] sm:w-[340px] sm:h-[340px] flex items-center justify-center">
+
+            <!-- Golden Background Disc -->
+            <div class="absolute inset-2 rounded-full bg-[#F9B900] shadow-xl"></div>
+
+            <!-- Portrait image -->
+            <div class="relative z-10 w-[240px] h-[240px] sm:w-[290px] sm:h-[290px] rounded-full overflow-hidden border-4 border-[#214F36] shadow-2xl">
+              <img
+                src="/assets/images/developer_about_portrait_1791100931798.jpg"
+                alt="Who is M. Anass"
+                referrerpolicy="no-referrer"
+                class="w-full h-full object-cover"
+              />
+            </div>
+
+            <!-- Orbiting / Surrounding Floating Tags (as required by prompt) -->
+            <div class="absolute -top-3 left-4 bg-white/95 text-[#214F36] px-3.5 py-1 rounded-full text-xs font-bold shadow-md z-20">
+              HTML
+            </div>
+            <div class="absolute top-8 -right-3 bg-white/95 text-[#214F36] px-3 py-1 rounded-full text-xs font-bold shadow-md z-20">
+              CSS
+            </div>
+            <div class="absolute bottom-16 -left-4 bg-[#F9B900] text-[#214F36] px-3.5 py-1 rounded-full text-xs font-extrabold shadow-md z-20">
+              JavaScript
+            </div>
+            <div class="absolute -bottom-3 left-10 bg-white/95 text-[#214F36] px-3.5 py-1 rounded-full text-xs font-bold shadow-md z-20">
+              React
+            </div>
+            <div class="absolute -bottom-2 right-6 bg-[#214F36] text-white border border-[#F9B900] px-3 py-1 rounded-full text-xs font-bold shadow-md z-20">
+              Responsive
+            </div>
+            <div class="absolute bottom-20 -right-4 bg-white/95 text-[#214F36] px-3 py-1 rounded-full text-xs font-bold shadow-md z-20">
+              UI Design
+            </div>
+            <div class="absolute top-1 -right-1 bg-[#171717] text-white px-3 py-1 rounded-full text-xs font-bold shadow-md z-20">
+              GitHub
+            </div>
+            <div class="absolute top-20 -left-6 bg-white/95 text-[#214F36] px-3 py-1 rounded-full text-xs font-bold shadow-md z-20">
+              WordPress
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Side: Bio, Statistics & Signature -->
+        <div class="lg:col-span-7 flex flex-col items-start">
+          <span class="text-xs font-bold text-[#F9B900] uppercase tracking-widest block mb-2">
+            — About Me
+          </span>
+
+          <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight mb-6">
+            Who is <span class="text-[#F9B900]">M. Anass?</span>
+          </h2>
+
+          <p class="text-base sm:text-lg text-emerald-100/90 leading-relaxed mb-8">
+            I'm a passionate Web Developer focused on creating modern, responsive and user-friendly websites. I turn ideas into functional digital experiences using clean code, creative design and modern web technologies.
+          </p>
+
+          <!-- Statistics Counters -->
+          <div class="grid grid-cols-3 gap-4 sm:gap-8 w-full py-6 border-y border-emerald-800/80 mb-8">
+            <div>
+              <div class="text-3xl sm:text-4xl font-extrabold text-[#F9B900] tabular-nums mb-1">
+                50+
+              </div>
+              <div class="text-xs sm:text-sm text-emerald-200/80 font-medium">
+                Projects Completed
+              </div>
+            </div>
+
+            <div>
+              <div class="text-3xl sm:text-4xl font-extrabold text-[#F9B900] tabular-nums mb-1">
+                10+
+              </div>
+              <div class="text-xs sm:text-sm text-emerald-200/80 font-medium">
+                Technologies Mastered
+              </div>
+            </div>
+
+            <div>
+              <div class="text-3xl sm:text-4xl font-extrabold text-[#F9B900] tabular-nums mb-1">
+                100%
+              </div>
+              <div class="text-xs sm:text-sm text-emerald-200/80 font-medium">
+                Client Focus & Care
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom Row: Download CV & Stylish Handwritten Signature -->
+          <div class="flex flex-wrap items-center justify-between gap-6 w-full">
+            <button
+              (click)="openCvModal()"
+              type="button"
+              class="group bg-white hover:bg-[#F9B900] text-[#214F36] px-6 py-3 rounded-full text-xs font-extrabold tracking-wide transition-all duration-200 shadow-lg flex items-center gap-2.5"
+            >
+              <span>Download CV</span>
+              <span class="w-6 h-6 rounded-full bg-[#214F36] text-white flex items-center justify-center group-hover:scale-105 transition-transform">
+                <mat-icon class="text-xs">arrow_forward</mat-icon>
+              </span>
+            </button>
+
+            <!-- Handwritten-Style Signature -->
+            <div class="flex items-center gap-3">
+              <span class="text-emerald-300/70 text-xs font-mono uppercase tracking-wider">Verified Signature</span>
+              <span class="font-signature text-4xl sm:text-5xl text-[#F9B900] tracking-wider select-none transform -rotate-3">
+                M. Anass
+              </span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== SKILLS SECTION ======================== -->
+  <section id="skills" class="py-20 md:py-28 px-4 sm:px-8 max-w-7xl mx-auto">
+    <div class="text-center max-w-2xl mx-auto mb-12">
+      <span class="text-xs font-bold text-[#F9B900] uppercase tracking-widest block mb-2">
+        — Capabilities
+      </span>
+      <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#171717] tracking-tight mb-3">
+        My <span class="text-[#F9B900]">Skills</span>
+      </h2>
+      <p class="text-base text-neutral-600">
+        Technologies I Work With to build fast, scalable, and responsive web products
+      </p>
+
+      <!-- Category Filter Tabs (Swipeable on mobile) -->
+      <div class="flex items-center justify-start sm:justify-center gap-2 mt-6 overflow-x-auto no-scrollbar py-1 px-1 max-w-full">
+        <button
+          (click)="filterSkills('all')"
+          type="button"
+          class="px-4 py-2 rounded-full text-xs font-bold transition-colors whitespace-nowrap shrink-0 cursor-pointer"
+          [class.bg-[#214F36]]="activeSkillCategory() === 'all'"
+          [class.text-white]="activeSkillCategory() === 'all'"
+          [class.bg-neutral-100]="activeSkillCategory() !== 'all'"
+          [class.text-neutral-700]="activeSkillCategory() !== 'all'"
+        >
+          All Skills
+        </button>
+        <button
+          (click)="filterSkills('frontend')"
+          type="button"
+          class="px-4 py-2 rounded-full text-xs font-bold transition-colors whitespace-nowrap shrink-0 cursor-pointer"
+          [class.bg-[#214F36]]="activeSkillCategory() === 'frontend'"
+          [class.text-white]="activeSkillCategory() === 'frontend'"
+          [class.bg-neutral-100]="activeSkillCategory() !== 'frontend'"
+          [class.text-neutral-700]="activeSkillCategory() !== 'frontend'"
+        >
+          Frontend & Logic
+        </button>
+        <button
+          (click)="filterSkills('styling')"
+          type="button"
+          class="px-4 py-2 rounded-full text-xs font-bold transition-colors whitespace-nowrap shrink-0 cursor-pointer"
+          [class.bg-[#214F36]]="activeSkillCategory() === 'styling'"
+          [class.text-white]="activeSkillCategory() === 'styling'"
+          [class.bg-neutral-100]="activeSkillCategory() !== 'styling'"
+          [class.text-neutral-700]="activeSkillCategory() !== 'styling'"
+        >
+          Styling & UI
+        </button>
+        <button
+          (click)="filterSkills('tools')"
+          type="button"
+          class="px-4 py-2 rounded-full text-xs font-bold transition-colors whitespace-nowrap shrink-0 cursor-pointer"
+          [class.bg-[#214F36]]="activeSkillCategory() === 'tools'"
+          [class.text-white]="activeSkillCategory() === 'tools'"
+          [class.bg-neutral-100]="activeSkillCategory() !== 'tools'"
+          [class.text-neutral-700]="activeSkillCategory() !== 'tools'"
+        >
+          CMS & Git
+        </button>
+      </div>
+    </div>
+
+    <!-- Modern Rounded Skill Cards Grid -->
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 sm:gap-5">
+      @for (skill of filteredSkills(); track skill.name) {
+        <div
+          class="bg-[#F5F5F5] hover:bg-white rounded-2xl p-5 border border-neutral-200/80 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 flex flex-col items-center text-center group"
+        >
+          <!-- Skill Icon -->
+          <div
+            class="w-12 h-12 rounded-xl bg-white text-[#214F36] group-hover:bg-[#F9B900] group-hover:text-[#214F36] flex items-center justify-center shadow-sm mb-3 transition-colors duration-200"
+          >
+            <mat-icon class="text-2xl">{{ skill.iconName }}</mat-icon>
+          </div>
+
+          <h4 class="text-sm font-bold text-[#171717] mb-2">{{ skill.name }}</h4>
+
+          <!-- Level Progress -->
+          <div class="w-full bg-neutral-200/80 rounded-full h-1.5 mb-1 overflow-hidden">
+            <div
+              class="bg-[#214F36] group-hover:bg-[#F9B900] h-full rounded-full transition-all duration-500"
+              [style.width.%]="skill.level"
+            ></div>
+          </div>
+          <span class="text-[11px] font-semibold text-neutral-500 tabular-nums">
+            {{ skill.level }}%
+          </span>
+        </div>
+      }
+    </div>
+  </section>
+
+  <!-- ======================== TOOLS SECTION ======================== -->
+  <section id="tools" class="py-16 md:py-24 bg-neutral-50/70 border-y border-neutral-200/60">
+    <div class="max-w-7xl mx-auto px-4 sm:px-8 text-center">
+      <span class="text-xs font-bold text-[#F9B900] uppercase tracking-widest block mb-2">
+        — Tooling & Workflow
+      </span>
+      <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#171717] tracking-tight mb-3">
+        Tools <span class="text-[#F9B900]">I Use</span>
+      </h2>
+      <p class="text-base text-neutral-600 max-w-xl mx-auto mb-14">
+        Technologies Behind My Work — crafted with modern development software
+      </p>
+
+      <!-- Circular Tools Grid -->
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-6 justify-center">
+        @for (tool of tools; track tool.name) {
+          <div
+            class="bg-white rounded-2xl p-5 border border-neutral-200/70 shadow-sm hover:shadow-xl hover:border-[#214F36]/30 transition-all duration-300 hover:-translate-y-1.5 flex flex-col items-center text-center group"
+          >
+            <!-- Circular Icon Holder -->
+            <div
+              class="w-16 h-16 rounded-full bg-neutral-100 group-hover:bg-[#214F36] text-[#214F36] group-hover:text-[#F9B900] flex items-center justify-center shadow-inner mb-3 transition-colors duration-300"
+            >
+              <mat-icon class="text-2xl">{{ tool.icon }}</mat-icon>
+            </div>
+
+            <h4 class="text-xs font-bold text-[#171717] group-hover:text-[#214F36] transition-colors mb-1">
+              {{ tool.name }}
+            </h4>
+            <span class="text-[10px] text-neutral-500 font-medium leading-tight">
+              {{ tool.role }}
+            </span>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== PROJECTS SECTION ======================== -->
+  <section id="projects" class="py-20 md:py-28 px-4 sm:px-8 max-w-7xl mx-auto">
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+      <div>
+        <span class="text-xs font-bold text-[#F9B900] uppercase tracking-widest block mb-2">
+          — My Projects
+        </span>
+        <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#171717] tracking-tight">
+          Featured <span class="text-[#F9B900]">Projects</span>
+        </h2>
+      </div>
+
+      <!-- Category Filter Tabs -->
+      <!-- Category Filter Tabs (Swipeable on mobile) -->
+      <div class="flex items-center gap-2 overflow-x-auto no-scrollbar py-1 px-1 max-w-full justify-start md:justify-end">
+        <button
+          (click)="filterProjects('all')"
+          type="button"
+          class="px-4 py-2 rounded-full text-xs font-bold transition-colors whitespace-nowrap shrink-0 cursor-pointer"
+          [class.bg-[#214F36]]="activeProjectCategory() === 'all'"
+          [class.text-white]="activeProjectCategory() === 'all'"
+          [class.bg-neutral-100]="activeProjectCategory() !== 'all'"
+          [class.text-neutral-700]="activeProjectCategory() !== 'all'"
+        >
+          All
+        </button>
+        <button
+          (click)="filterProjects('web')"
+          type="button"
+          class="px-4 py-2 rounded-full text-xs font-bold transition-colors whitespace-nowrap shrink-0 cursor-pointer"
+          [class.bg-[#214F36]]="activeProjectCategory() === 'web'"
+          [class.text-white]="activeProjectCategory() === 'web'"
+          [class.bg-neutral-100]="activeProjectCategory() !== 'web'"
+          [class.text-neutral-700]="activeProjectCategory() !== 'web'"
+        >
+          Web Applications
+        </button>
+        <button
+          (click)="filterProjects('ecommerce')"
+          type="button"
+          class="px-4 py-2 rounded-full text-xs font-bold transition-colors whitespace-nowrap shrink-0 cursor-pointer"
+          [class.bg-[#214F36]]="activeProjectCategory() === 'ecommerce'"
+          [class.text-white]="activeProjectCategory() === 'ecommerce'"
+          [class.bg-neutral-100]="activeProjectCategory() !== 'ecommerce'"
+          [class.text-neutral-700]="activeProjectCategory() !== 'ecommerce'"
+        >
+          E-Commerce
+        </button>
+        <button
+          (click)="filterProjects('business')"
+          type="button"
+          class="px-4 py-2 rounded-full text-xs font-bold transition-colors whitespace-nowrap shrink-0 cursor-pointer"
+          [class.bg-[#214F36]]="activeProjectCategory() === 'business'"
+          [class.text-white]="activeProjectCategory() === 'business'"
+          [class.bg-neutral-100]="activeProjectCategory() !== 'business'"
+          [class.text-neutral-700]="activeProjectCategory() !== 'business'"
+        >
+          Business & Agency
+        </button>
+      </div>
+    </div>
+
+    <!-- Large Featured Project Cards Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      @for (project of filteredProjects(); track project.id) {
+        <div
+          class="bg-white rounded-3xl overflow-hidden border border-neutral-200/80 shadow-md hover:shadow-2xl transition-all duration-300 flex flex-col group"
+        >
+          <!-- Project Preview Image Container with Hover Zoom -->
+          <button
+            type="button"
+            (click)="openProjectModal(project)"
+            class="relative aspect-video overflow-hidden bg-neutral-100 cursor-pointer w-full text-left p-0 border-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#214F36]"
+          >
+            <img
+              [src]="project.image"
+              [alt]="project.title"
+              referrerpolicy="no-referrer"
+              class="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
+              <span class="text-xs font-bold text-white bg-[#214F36] px-3.5 py-1.5 rounded-full flex items-center gap-1.5 shadow-lg">
+                <mat-icon class="text-sm">visibility</mat-icon>
+                <span>Click to Preview Case Study</span>
+              </span>
+            </div>
+          </button>
+
+          <!-- Project Body Content -->
+          <div class="p-7 flex flex-col justify-between flex-1">
+            <div>
+              <div class="flex items-center justify-between gap-4 mb-2">
+                <h3 class="text-2xl font-bold text-[#171717] group-hover:text-[#214F36] transition-colors">
+                  {{ project.title }}
+                </h3>
+              </div>
+
+              <p class="text-sm text-neutral-600 leading-relaxed mb-5">
+                {{ project.description }}
+              </p>
+
+              <!-- Technologies list as clean unboxed text with subtle typographic separators -->
+              <div class="flex flex-wrap items-center gap-2 text-xs font-semibold text-neutral-600 mb-6">
+                <span class="text-neutral-400">Tech:</span>
+                @for (tech of project.technologies; track tech; let last = $last) {
+                  <span class="text-[#214F36] font-bold">{{ tech }}</span>
+                  @if (!last) {
+                    <span class="text-neutral-300" aria-hidden="true">•</span>
+                  }
+                }
+              </div>
+            </div>
+
+            <!-- Action Buttons: Live Demo & Case Study -->
+            <div class="flex items-center gap-3 pt-4 border-t border-neutral-100">
+              <a
+                [href]="project.liveUrl"
+                [target]="project.liveUrl.startsWith('http') ? '_blank' : '_self'"
+                rel="noopener noreferrer"
+                class="flex-1 bg-[#214F36] hover:bg-[#163625] text-white py-2.5 px-4 rounded-xl text-xs font-bold transition-colors flex items-center justify-center gap-2 shadow-sm text-center cursor-pointer"
+              >
+                <span>Live Demo</span>
+                <mat-icon class="text-xs">launch</mat-icon>
+              </a>
+
+              <button
+                (click)="openProjectModal(project)"
+                type="button"
+                class="flex-1 bg-neutral-100 hover:bg-neutral-200 text-[#171717] py-2.5 px-4 rounded-xl text-xs font-bold transition-colors flex items-center justify-center gap-2 cursor-pointer"
+              >
+                <span>Case Study</span>
+                <mat-icon class="text-xs">info</mat-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  </section>
+
+  <!-- ======================== WHY WORK WITH ME ======================== -->
+  <section class="py-20 bg-neutral-50/80 border-t border-neutral-200/60">
+    <div class="max-w-7xl mx-auto px-4 sm:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-14">
+        <span class="text-xs font-bold text-[#F9B900] uppercase tracking-widest block mb-2">
+          — Value Proposition
+        </span>
+        <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#171717] tracking-tight mb-3">
+          Why <span class="text-[#F9B900]">Choose Me?</span>
+        </h2>
+        <p class="text-base text-neutral-600">
+          Four foundational pillars engineered into every single web project
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        @for (item of whyChooseMe; track item.step) {
+          <div
+            class="bg-white rounded-3xl p-8 border border-neutral-200/80 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1.5 flex flex-col justify-between group"
+          >
+            <div>
+              <div class="flex items-center justify-between mb-6">
+                <span class="text-3xl font-extrabold text-[#F9B900] tabular-nums">
+                  {{ item.step }}
+                </span>
+                <div class="w-10 h-10 rounded-xl bg-neutral-100 text-[#214F36] group-hover:bg-[#214F36] group-hover:text-white flex items-center justify-center transition-colors">
+                  <mat-icon class="text-xl">{{ item.icon }}</mat-icon>
+                </div>
+              </div>
+
+              <h3 class="text-xl font-bold text-[#171717] mb-3 group-hover:text-[#214F36] transition-colors">
+                {{ item.title }}
+              </h3>
+
+              <p class="text-sm text-neutral-600 leading-relaxed">
+                {{ item.desc }}
+              </p>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== WORK PROCESS ======================== -->
+  <section id="process" class="py-20 md:py-28 px-4 sm:px-8 max-w-7xl mx-auto">
+    <div class="text-center max-w-2xl mx-auto mb-16">
+      <span class="text-xs font-bold text-[#F9B900] uppercase tracking-widest block mb-2">
+        — Execution Timeline
+      </span>
+      <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#171717] tracking-tight mb-3">
+        Work <span class="text-[#F9B900]">Process</span>
+      </h2>
+      <p class="text-base text-neutral-600">
+        A structured, reliable four-step journey from initial idea to live production
+      </p>
+    </div>
+
+    <!-- Timeline Grid: Horizontal on desktop, Vertical on mobile -->
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8 relative">
+
+      @for (step of processSteps; track step.number; let i = $index) {
+        <div class="relative flex flex-col items-center md:items-start text-center md:text-left group">
+
+          <!-- Step Number & Icon Circle -->
+          <div class="flex items-center gap-3 mb-5">
+            <div
+              class="w-14 h-14 rounded-2xl bg-[#214F36] text-[#F9B900] font-extrabold text-lg flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform"
+            >
+              {{ step.number }}
+            </div>
+            <div class="w-10 h-10 rounded-xl bg-neutral-100 text-[#214F36] flex items-center justify-center">
+              <mat-icon class="text-xl">{{ step.icon }}</mat-icon>
+            </div>
+          </div>
+
+          <h3 class="text-xl font-bold text-[#171717] mb-2 group-hover:text-[#214F36] transition-colors">
+            {{ step.title }}
+          </h3>
+
+          <p class="text-sm text-neutral-600 leading-relaxed">
+            {{ step.desc }}
+          </p>
+        </div>
+      }
+    </div>
+  </section>
+
+  <!-- ======================== TESTIMONIALS SECTION ======================== -->
+  <section id="testimonials" class="py-20 md:py-28 bg-[#F5F5F5] border-y border-neutral-200/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-14">
+        <span class="text-xs font-bold text-[#F9B900] uppercase tracking-widest block mb-2">
+          — Client Reviews
+        </span>
+        <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#171717] tracking-tight mb-3">
+          What <span class="text-[#F9B900]">Clients Say</span>
+        </h2>
+        <p class="text-base text-neutral-600">
+          Honest feedback from founders, dentists, and businesses I've collaborated with
+        </p>
+      </div>
+
+      <!-- 3 Testimonial Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        @for (testimonial of testimonials; track testimonial.name) {
+          <div
+            class="bg-white rounded-3xl p-8 border border-neutral-200/70 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between"
+          >
+            <div>
+              <!-- 5 Stars -->
+              <div class="flex items-center gap-1 text-[#F9B900] mb-4">
+                @for (star of [1,2,3,4,5]; track star) {
+                  <mat-icon class="text-sm">star</mat-icon>
+                }
+              </div>
+
+              <!-- Review Quote -->
+              <p class="text-sm text-neutral-700 leading-relaxed italic mb-6">
+                "{{ testimonial.review }}"
+              </p>
+            </div>
+
+            <!-- Client Info Row -->
+            <div class="flex items-center gap-3.5 pt-4 border-t border-neutral-100">
+              <img
+                [src]="testimonial.avatar"
+                [alt]="testimonial.name"
+                referrerpolicy="no-referrer"
+                class="w-11 h-11 rounded-full object-cover border-2 border-[#214F36]"
+              />
+              <div>
+                <h4 class="text-sm font-bold text-[#171717]">{{ testimonial.name }}</h4>
+                <p class="text-xs text-neutral-500 font-medium">
+                  {{ testimonial.role }} · <span class="text-[#214F36] font-semibold">{{ testimonial.company }}</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== CONTACT SECTION (DARK GREEN) ======================== -->
+  <section id="contact" class="py-12 px-3 sm:px-6 md:px-8 max-w-7xl mx-auto">
+    <div
+      class="bg-[#214F36] text-white rounded-[2.5rem] py-16 sm:py-20 px-6 sm:px-12 md:px-16 shadow-2xl relative overflow-hidden"
+    >
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+
+        <!-- Left Details -->
+        <div class="lg:col-span-5 flex flex-col justify-between">
+          <div>
+            <span class="text-xs font-bold text-[#F9B900] uppercase tracking-widest block mb-2">
+              — Get in Touch
+            </span>
+
+            <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight mb-5 leading-tight">
+              Let's Build Something <span class="text-[#F9B900]">Amazing</span>
+            </h2>
+
+            <p class="text-base text-emerald-100/90 leading-relaxed mb-8">
+              Have a project in mind? Let's turn your idea into a modern digital experience. Fill out the form or reach out directly via email or messaging.
+            </p>
+
+            <!-- Direct Contact List -->
+            <div class="flex flex-col gap-4 mb-8">
+              <!-- Email -->
+              <a
+                href="mailto:info.developer62@gmail.com"
+                class="flex items-center gap-3.5 text-sm text-emerald-100 hover:text-[#F9B900] transition-colors group"
+              >
+                <span class="w-10 h-10 rounded-xl bg-emerald-900/80 flex items-center justify-center text-[#F9B900] group-hover:scale-105 transition-transform">
+                  <mat-icon class="text-lg">mail</mat-icon>
+                </span>
+                <div>
+                  <div class="text-[11px] text-emerald-300/80 uppercase font-mono">Email Me</div>
+                  <div class="font-semibold text-white">info.developer62&#64;gmail.com</div>
+                </div>
+              </a>
+
+              <!-- WhatsApp -->
+              <a
+                href="https://wa.me/923001234567"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="flex items-center gap-3.5 text-sm text-emerald-100 hover:text-[#F9B900] transition-colors group"
+              >
+                <span class="w-10 h-10 rounded-xl bg-emerald-900/80 flex items-center justify-center text-[#F9B900] group-hover:scale-105 transition-transform">
+                  <mat-icon class="text-lg">chat</mat-icon>
+                </span>
+                <div>
+                  <div class="text-[11px] text-emerald-300/80 uppercase font-mono">WhatsApp</div>
+                  <div class="font-semibold text-white">+92 300 1234567 (Chat Now)</div>
+                </div>
+              </a>
+
+              <!-- Location -->
+              <div class="flex items-center gap-3.5 text-sm text-emerald-100">
+                <span class="w-10 h-10 rounded-xl bg-emerald-900/80 flex items-center justify-center text-[#F9B900]">
+                  <mat-icon class="text-lg">location_on</mat-icon>
+                </span>
+                <div>
+                  <div class="text-[11px] text-emerald-300/80 uppercase font-mono">Location</div>
+                  <div class="font-semibold text-white">Pakistan (Serving Worldwide)</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Social Links -->
+          <div class="flex items-center gap-3 pt-6 border-t border-emerald-800/80">
+            <a
+              href="https://github.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-10 h-10 rounded-full bg-emerald-900/80 text-white hover:bg-[#F9B900] hover:text-[#214F36] flex items-center justify-center transition-colors shadow-sm"
+              title="GitHub"
+            >
+              <mat-icon class="text-base">terminal</mat-icon>
+            </a>
+            <a
+              href="https://linkedin.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-10 h-10 rounded-full bg-emerald-900/80 text-white hover:bg-[#F9B900] hover:text-[#214F36] flex items-center justify-center transition-colors shadow-sm"
+              title="LinkedIn"
+            >
+              <mat-icon class="text-base">badge</mat-icon>
+            </a>
+            <a
+              href="https://wa.me/923001234567"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-10 h-10 rounded-full bg-emerald-900/80 text-white hover:bg-[#F9B900] hover:text-[#214F36] flex items-center justify-center transition-colors shadow-sm"
+              title="WhatsApp"
+            >
+              <mat-icon class="text-base">forum</mat-icon>
+            </a>
+          </div>
+        </div>
+
+        <!-- Right Side: Contact Form -->
+        <div class="lg:col-span-7 bg-white text-[#171717] rounded-3xl p-8 sm:p-10 shadow-2xl">
+          <h3 class="text-2xl font-bold text-[#171717] mb-2">Send a Message</h3>
+          <p class="text-xs text-neutral-500 mb-6">
+            I usually reply within 24 hours. Let's discuss your timeline & project goals.
+          </p>
+
+          <!-- Success Alert -->
+          @if (contactSuccess()) {
+            <div class="mb-6 p-4 rounded-2xl bg-emerald-50 border border-emerald-300 text-emerald-800 flex items-center gap-3 animate-fade-in">
+              <mat-icon class="text-emerald-600">check_circle</mat-icon>
+              <div>
+                <p class="text-sm font-bold">Thank you, message received!</p>
+                <p class="text-xs">I will review your message and get back to you shortly.</p>
+              </div>
+            </div>
+          }
+
+          <form [formGroup]="contactForm" (ngSubmit)="submitContact()" class="space-y-4">
+            <!-- Name Input -->
+            <div>
+              <label for="name" class="block text-xs font-bold text-neutral-700 uppercase tracking-wider mb-1.5">
+                Your Name *
+              </label>
+              <input
+                id="name"
+                type="text"
+                formControlName="name"
+                placeholder="John Doe"
+                class="w-full px-4 py-3 rounded-xl border border-neutral-300 bg-neutral-50 text-sm text-[#171717] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#214F36] transition-all"
+                [class.border-red-500]="contactForm.get('name')?.invalid && contactForm.get('name')?.touched"
+              />
+              @if (contactForm.get('name')?.invalid && contactForm.get('name')?.touched) {
+                <span class="text-xs text-red-500 mt-1 block">Please enter your name (min 2 characters).</span>
+              }
+            </div>
+
+            <!-- Email Input -->
+            <div>
+              <label for="email" class="block text-xs font-bold text-neutral-700 uppercase tracking-wider mb-1.5">
+                Your Email *
+              </label>
+              <input
+                id="email"
+                type="email"
+                formControlName="email"
+                placeholder="john@example.com"
+                class="w-full px-4 py-3 rounded-xl border border-neutral-300 bg-neutral-50 text-sm text-[#171717] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#214F36] transition-all"
+                [class.border-red-500]="contactForm.get('email')?.invalid && contactForm.get('email')?.touched"
+              />
+              @if (contactForm.get('email')?.invalid && contactForm.get('email')?.touched) {
+                <span class="text-xs text-red-500 mt-1 block">Please enter a valid email address.</span>
+              }
+            </div>
+
+            <!-- Project Type Dropdown -->
+            <div>
+              <label for="projectType" class="block text-xs font-bold text-neutral-700 uppercase tracking-wider mb-1.5">
+                Project Type
+              </label>
+              <select
+                id="projectType"
+                formControlName="projectType"
+                class="w-full px-4 py-3 rounded-xl border border-neutral-300 bg-neutral-50 text-sm text-[#171717] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#214F36] transition-all"
+              >
+                <option value="Web Development">Web Development (Full Website)</option>
+                <option value="Frontend Development">Frontend Development (UI/React)</option>
+                <option value="E-Commerce Development">E-Commerce Store</option>
+                <option value="Website Redesign">Website Redesign & Speed Optimization</option>
+                <option value="Other">Other Custom Inquiry</option>
+              </select>
+            </div>
+
+            <!-- Message Input -->
+            <div>
+              <label for="message" class="block text-xs font-bold text-neutral-700 uppercase tracking-wider mb-1.5">
+                Message *
+              </label>
+              <textarea
+                id="message"
+                formControlName="message"
+                rows="4"
+                placeholder="Tell me about your project, goals, and target timeline..."
+                class="w-full px-4 py-3 rounded-xl border border-neutral-300 bg-neutral-50 text-sm text-[#171717] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#214F36] transition-all resize-none"
+                [class.border-red-500]="contactForm.get('message')?.invalid && contactForm.get('message')?.touched"
+              ></textarea>
+              @if (contactForm.get('message')?.invalid && contactForm.get('message')?.touched) {
+                <span class="text-xs text-red-500 mt-1 block">Please share some details about your project (min 10 characters).</span>
+              }
+            </div>
+
+            <!-- Submit Button -->
+            <button
+              type="submit"
+              [disabled]="isSubmitting()"
+              class="w-full bg-[#214F36] hover:bg-[#163625] text-white py-3.5 px-6 rounded-xl font-bold text-sm tracking-wide transition-all duration-200 flex items-center justify-center gap-2 shadow-md hover:shadow-xl disabled:opacity-70 cursor-pointer"
+            >
+              @if (isSubmitting()) {
+                <span class="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+                <span>Sending Message...</span>
+              } @else {
+                <span>Send Message</span>
+                <mat-icon class="text-sm">arrow_forward</mat-icon>
+              }
+            </button>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== FOOTER (MATCHING USER REFERENCE DESIGN) ======================== -->
+  <footer class="bg-[#214F36] text-white pt-14 pb-12 sm:pt-16 sm:pb-14 px-4 sm:px-8 border-t border-emerald-900/60">
+    <div class="max-w-7xl mx-auto">
+      
+      <!-- Top Row: Brand Lockup | Nav Links | Back to Top Button -->
+      <div class="flex flex-col lg:flex-row items-center lg:items-center justify-between gap-8 lg:gap-6">
+        
+        <!-- Left: Brand Lockup (Logo + M.Anass. + Web Developer · Pakistan) -->
+        <div class="flex items-center gap-3.5 self-center lg:self-auto">
+          <div class="w-11 h-11 rounded-full bg-[#F9B900] text-[#171717] font-extrabold flex items-center justify-center text-lg shadow-md shrink-0">
+            A
+          </div>
+          <div class="flex flex-col">
+            <div class="text-xl font-extrabold tracking-tight text-white flex items-center">
+              <span>M.Anass</span>
+            </div>
+            <div class="text-xs text-emerald-100/75 font-medium tracking-wide">
+              Web Developer · Pakistan
+            </div>
+          </div>
+        </div>
+
+        <!-- Middle: Navigation Links -->
+        <nav class="flex flex-wrap items-center justify-center gap-x-6 sm:gap-x-7 gap-y-3 text-sm font-medium text-emerald-100/90">
+          <a
+            (click)="scrollTo('home')"
+            href="javascript:void(0)"
+            class="hover:text-[#F9B900] transition-colors"
+          >
+            Home
+          </a>
+          <a
+            (click)="scrollTo('services')"
+            href="javascript:void(0)"
+            class="hover:text-[#F9B900] transition-colors"
+          >
+            Services
+          </a>
+          <a
+            (click)="scrollTo('about')"
+            href="javascript:void(0)"
+            class="hover:text-[#F9B900] transition-colors"
+          >
+            About
+          </a>
+          <a
+            (click)="scrollTo('skills')"
+            href="javascript:void(0)"
+            class="hover:text-[#F9B900] transition-colors"
+          >
+            Tech Stack
+          </a>
+          <a
+            (click)="scrollTo('projects')"
+            href="javascript:void(0)"
+            class="hover:text-[#F9B900] transition-colors"
+          >
+            Projects
+          </a>
+          <a
+            (click)="scrollTo('testimonials')"
+            href="javascript:void(0)"
+            class="hover:text-[#F9B900] transition-colors"
+          >
+            Testimonials
+          </a>
+          <a
+            (click)="scrollTo('contact')"
+            href="javascript:void(0)"
+            class="hover:text-[#F9B900] transition-colors"
+          >
+            Contact
+          </a>
+        </nav>
+
+        <!-- Right: Rounded Pill "Back to top ↑" Button matching image -->
+        <button
+          (click)="scrollToTop()"
+          type="button"
+          class="bg-emerald-950/60 hover:bg-[#F9B900] hover:text-[#214F36] text-white border border-emerald-700/60 px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 flex items-center gap-2 shadow-sm hover:shadow-md cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#F9B900]"
+        >
+          <span>Back to top</span>
+          <mat-icon class="text-base leading-none w-4 h-4 flex items-center justify-center">north</mat-icon>
+        </button>
+
+      </div>
+
+      <!-- Subtle Horizontal Divider Line -->
+      <div class="border-t border-emerald-800/60 my-7 sm:my-9"></div>
+
+      <!-- Bottom Row: Copyright (Left) & Social Links (Right) -->
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs sm:text-sm text-emerald-100/70">
+        
+        <!-- Left: Copyright -->
+        <div class="text-center sm:text-left">
+          © M.Anass. All rights reserved.
+        </div>
+
+        <!-- Right: Links with Dot Separators -->
+        <div class="flex flex-wrap items-center justify-center gap-3">
+          <a
+            href="https://github.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="hover:text-white transition-colors"
+          >
+            GitHub
+          </a>
+          <span class="text-emerald-500/60 select-none" aria-hidden="true">·</span>
+          <a
+            href="https://linkedin.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="hover:text-white transition-colors"
+          >
+            LinkedIn
+          </a>
+          <span class="text-emerald-500/60 select-none" aria-hidden="true">·</span>
+          <a
+            href="mailto:info.developer62@gmail.com"
+            class="hover:text-white transition-colors font-medium text-emerald-100/85"
+          >
+            Info.developer62&#64;gmail.com
+          </a>
+        </div>
+
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- ======================== BACK TO TOP BUTTON ======================== -->
+  @if (isScrolled()) {
+    <button
+      (click)="scrollToTop()"
+      type="button"
+      class="fixed bottom-6 right-6 z-40 w-12 h-12 rounded-full bg-[#214F36] text-[#F9B900] shadow-2xl flex items-center justify-center hover:bg-[#163625] hover:scale-110 transition-all border border-[#F9B900]/30 focus:outline-none"
+      aria-label="Back to top"
+    >
+      <mat-icon class="text-xl">arrow_upward</mat-icon>
+    </button>
+  }
+
+  <!-- ======================== PROJECT DETAILS & DEMO MODAL ======================== -->
+  @if (selectedProject()) {
+    <div
+      class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto"
+      role="dialog"
+      aria-modal="true"
+    >
+      <!-- Backdrop Button -->
+      <button
+        type="button"
+        (click)="closeProjectModal()"
+        class="fixed inset-0 bg-black/80 backdrop-blur-sm cursor-default w-full h-full border-0 focus:outline-none"
+        aria-label="Close project modal"
+      ></button>
+
+      <!-- Modal Card -->
+      <div
+        class="bg-white rounded-3xl max-w-3xl w-full overflow-hidden shadow-2xl my-8 relative flex flex-col z-10"
+      >
+        <!-- Modal Header Image -->
+        <div class="relative aspect-video w-full bg-neutral-100">
+          <img
+            [src]="selectedProject()?.image"
+            [alt]="selectedProject()?.title"
+            referrerpolicy="no-referrer"
+            class="w-full h-full object-cover object-top"
+          />
+          <button
+            (click)="closeProjectModal()"
+            type="button"
+            class="absolute top-4 right-4 w-9 h-9 rounded-full bg-black/70 text-white hover:bg-black flex items-center justify-center transition-colors"
+            aria-label="Close project details"
+          >
+            <mat-icon class="text-lg">close</mat-icon>
+          </button>
+        </div>
+
+        <!-- Modal Body -->
+        <div class="p-8">
+          <div class="flex flex-wrap items-center justify-between gap-4 mb-3">
+            <h3 class="text-2xl font-bold text-[#171717]">
+              {{ selectedProject()?.title }}
+            </h3>
+            <span class="text-xs font-bold text-emerald-800 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">
+              {{ selectedProject()?.metrics }}
+            </span>
+          </div>
+
+          <p class="text-sm text-neutral-600 leading-relaxed mb-6">
+            {{ selectedProject()?.fullDetails }}
+          </p>
+
+          <h4 class="text-xs font-bold text-neutral-900 uppercase tracking-wider mb-2">Key Highlights & Architecture:</h4>
+          <ul class="space-y-2 mb-6">
+            @for (feature of selectedProject()?.features; track feature) {
+              <li class="text-xs text-neutral-700 flex items-start gap-2">
+                <mat-icon class="text-emerald-700 text-sm mt-0.5">check_circle</mat-icon>
+                <span>{{ feature }}</span>
+              </li>
+            }
+          </ul>
+
+          <div class="flex flex-wrap items-center gap-3 pt-4 border-t border-neutral-200">
+            @if (selectedProject()?.liveUrl) {
+              <a
+                [href]="selectedProject()?.liveUrl"
+                [target]="selectedProject()?.liveUrl?.startsWith('http') ? '_blank' : '_self'"
+                rel="noopener noreferrer"
+                class="flex-1 bg-[#F9B900] hover:bg-amber-400 text-[#214F36] py-3 px-5 rounded-xl font-extrabold text-xs tracking-wide transition-colors flex items-center justify-center gap-2 shadow-md cursor-pointer"
+              >
+                <span>Open Live Website</span>
+                <mat-icon class="text-sm">open_in_new</mat-icon>
+              </a>
+            }
+
+            <button
+              (click)="scrollTo('contact'); closeProjectModal()"
+              type="button"
+              class="flex-1 bg-[#214F36] hover:bg-[#163625] text-white py-3 px-5 rounded-xl font-bold text-xs tracking-wide transition-colors flex items-center justify-center gap-2 cursor-pointer"
+            >
+              <span>Discuss Project</span>
+              <mat-icon class="text-sm">arrow_forward</mat-icon>
+            </button>
+            <button
+              (click)="closeProjectModal()"
+              type="button"
+              class="bg-neutral-100 hover:bg-neutral-200 text-[#171717] py-3 px-5 rounded-xl font-bold text-xs transition-colors cursor-pointer"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  }
+
+  <!-- ======================== SERVICE DETAILS MODAL ======================== -->
+  @if (selectedService()) {
+    <div
+      class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto"
+      role="dialog"
+      aria-modal="true"
+    >
+      <button
+        type="button"
+        (click)="closeServiceModal()"
+        class="fixed inset-0 bg-black/80 backdrop-blur-sm cursor-default w-full h-full border-0 focus:outline-none"
+        aria-label="Close service modal"
+      ></button>
+
+      <div
+        class="bg-white rounded-3xl max-w-xl w-full p-8 shadow-2xl relative z-10"
+      >
+        <button
+          (click)="closeServiceModal()"
+          type="button"
+          class="absolute top-6 right-6 w-9 h-9 rounded-full bg-neutral-100 text-[#171717] hover:bg-neutral-200 flex items-center justify-center transition-colors"
+          aria-label="Close service details"
+        >
+          <mat-icon class="text-lg">close</mat-icon>
+        </button>
+
+        <div class="w-14 h-14 rounded-2xl bg-[#214F36] text-[#F9B900] flex items-center justify-center shadow-md mb-5">
+          <mat-icon class="text-2xl">{{ selectedService()?.icon }}</mat-icon>
+        </div>
+
+        <h3 class="text-2xl font-bold text-[#171717] mb-2">{{ selectedService()?.title }}</h3>
+        <p class="text-sm text-neutral-600 leading-relaxed mb-6">{{ selectedService()?.fullDesc }}</p>
+
+        <h4 class="text-xs font-bold text-neutral-900 uppercase tracking-wider mb-3">Included Deliverables:</h4>
+        <ul class="space-y-2 mb-8">
+          @for (item of selectedService()?.deliverables; track item) {
+            <li class="text-xs text-neutral-700 flex items-start gap-2">
+              <mat-icon class="text-emerald-700 text-sm mt-0.5">verified</mat-icon>
+              <span>{{ item }}</span>
+            </li>
+          }
+        </ul>
+
+        <button
+          (click)="scrollTo('contact'); closeServiceModal()"
+          type="button"
+          class="w-full bg-[#214F36] hover:bg-[#163625] text-white py-3.5 px-6 rounded-xl font-bold text-xs tracking-wide transition-colors flex items-center justify-center gap-2"
+        >
+          <span>Get Started With This Service</span>
+          <mat-icon class="text-sm">arrow_forward</mat-icon>
+        </button>
+      </div>
+    </div>
+  }
+
+  <!-- ======================== CV DOWNLOAD MODAL ======================== -->
+  @if (cvModalOpen()) {
+    <div
+      class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto"
+      role="dialog"
+      aria-modal="true"
+    >
+      <button
+        type="button"
+        (click)="closeCvModal()"
+        class="fixed inset-0 bg-black/80 backdrop-blur-sm cursor-default w-full h-full border-0 focus:outline-none"
+        aria-label="Close CV modal"
+      ></button>
+
+      <div
+        class="bg-white rounded-3xl max-w-lg w-full p-8 shadow-2xl relative text-center z-10"
+      >
+        <button
+          (click)="closeCvModal()"
+          type="button"
+          class="absolute top-6 right-6 w-9 h-9 rounded-full bg-neutral-100 text-[#171717] hover:bg-neutral-200 flex items-center justify-center transition-colors"
+          aria-label="Close CV dialog"
+        >
+          <mat-icon class="text-lg">close</mat-icon>
+        </button>
+
+        <div class="w-16 h-16 rounded-full bg-emerald-50 text-[#214F36] mx-auto flex items-center justify-center mb-4">
+          <mat-icon class="text-3xl">description</mat-icon>
+        </div>
+
+        <h3 class="text-2xl font-bold text-[#171717] mb-2">M. Anass — Curriculum Vitae</h3>
+        <p class="text-xs text-neutral-500 mb-6">
+          Web Developer & Frontend Developer based in Pakistan · 50+ Projects Completed
+        </p>
+
+        <div class="bg-neutral-50 rounded-2xl p-4 text-left border border-neutral-200/80 mb-6 text-xs text-neutral-600 space-y-2">
+          <div class="flex justify-between font-semibold text-neutral-800">
+            <span>Role:</span>
+            <span>Web Developer & Frontend Developer</span>
+          </div>
+          <div class="flex justify-between">
+            <span>Key Stack:</span>
+            <span>HTML5, CSS3, JavaScript, React, Tailwind</span>
+          </div>
+          <div class="flex justify-between">
+            <span>Experience:</span>
+            <span>50+ Projects delivered for global clients</span>
+          </div>
+          <div class="flex justify-between">
+            <span>Availability:</span>
+            <span class="text-emerald-700 font-bold">Immediate (Freelance & Remote)</span>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <button
+            (click)="downloadResume()"
+            type="button"
+            class="flex-1 bg-[#214F36] hover:bg-[#163625] text-white py-3.5 px-6 rounded-xl font-bold text-xs tracking-wide transition-colors flex items-center justify-center gap-2 shadow-lg"
+          >
+            <span>Download CV File</span>
+            <mat-icon class="text-sm">download</mat-icon>
+          </button>
+          <button
+            (click)="closeCvModal()"
+            type="button"
+            class="bg-neutral-100 hover:bg-neutral-200 text-[#171717] py-3.5 px-6 rounded-xl font-bold text-xs transition-colors"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  }
+
+</div>

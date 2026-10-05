@@ -1,0 +1,107 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-signature: 'Caveat', cursive;
+  --color-brand-green: #214F36;
+  --color-brand-green-dark: #163625;
+  --color-brand-green-light: #2a6646;
+  --color-brand-yellow: #F9B900;
+  --color-brand-yellow-hover: #e2a700;
+  --color-brand-dark: #171717;
+  --color-brand-gray: #F5F5F5;
+}
+
+body {
+  font-family: var(--font-sans);
+}
+
+.font-signature {
+  font-family: 'Caveat', cursive;
+}
+
+/* Continuous Marquee Animation */
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 24s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* Subtle Floating Animation */
+@keyframes float-slow {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes float-delayed {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(8px);
+  }
+}
+
+.animate-float {
+  animation: float-slow 4s ease-in-out infinite;
+}
+
+.animate-float-delayed {
+  animation: float-delayed 4.5s ease-in-out infinite;
+}
+
+/* Circular Rotating Badge */
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 16s linear infinite;
+}
+
+/* Glassmorphism & Shadow utilities */
+.card-shadow {
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.05), 0 5px 15px -5px rgba(0, 0, 0, 0.03);
+}
+
+.card-shadow-hover:hover {
+  box-shadow: 0 20px 35px -5px rgba(33, 79, 54, 0.12), 0 10px 20px -5px rgba(33, 79, 54, 0.08);
+}
+
+/* Hide scrollbars for clean touch swipe on mobile */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Tap highlight removal for slick mobile feel */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+
