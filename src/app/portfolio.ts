@@ -465,7 +465,7 @@ export class Portfolio implements OnInit {
     // Generates a mock direct text file or triggers download confirmation
     const cvText = `
 M. ANASS - WEB DEVELOPER & FRONTEND DEVELOPER
-Based in Pakistan | Email: info.developer62@gmail.com
+Based in Pakistan | Email: info.developer62@gmail.com | Phone: +92 3015539449
 Specialization: Modern Web Development, Frontend Architecture, E-Commerce, Responsive UI
 
 Core Skills:
