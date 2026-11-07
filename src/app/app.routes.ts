@@ -11,6 +11,10 @@ export const routes: Routes = [
       import('./business-site/business-site').then((m) => m.BusinessSite),
   },
   {
+    path: 'admin',
+    loadComponent: () => import('./admin/admin').then((m) => m.Admin),
+  },
+  {
     path: '**',
     redirectTo: '',
   },

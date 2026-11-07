@@ -1,0 +1,1143 @@
+<div class="min-h-screen bg-[#F8F9FA] text-[#171717] font-sans selection:bg-[#F9B900] selection:text-[#214F36]">
+
+  <!-- Toast Notification Banner -->
+  @if (toastMessage()) {
+    <div
+      class="fixed top-5 right-5 z-50 bg-[#214F36] text-white px-5 py-3.5 rounded-2xl shadow-2xl flex items-center gap-3 border border-[#F9B900]/40 animate-bounce-subtle"
+    >
+      <mat-icon class="text-[#F9B900]">check_circle</mat-icon>
+      <span class="text-sm font-semibold tracking-wide">{{ toastMessage() }}</span>
+    </div>
+  }
+
+  <!-- ======================== LOGIN SCREEN (WHEN NOT AUTHENTICATED) ======================== -->
+  @if (!portfolioData.isAuthenticated()) {
+    <div class="min-h-screen flex items-center justify-center p-4 sm:p-6 bg-gradient-to-br from-[#214F36] via-[#163625] to-[#0c1e15] relative overflow-hidden">
+      <!-- Background subtle decorative shapes -->
+      <div class="absolute -top-32 -left-32 w-96 h-96 rounded-full bg-[#F9B900]/10 blur-3xl pointer-events-none"></div>
+      <div class="absolute -bottom-32 -right-32 w-96 h-96 rounded-full bg-emerald-500/10 blur-3xl pointer-events-none"></div>
+
+      <div class="w-full max-w-md bg-white rounded-3xl shadow-2xl p-8 sm:p-10 border border-neutral-100 relative z-10">
+        
+        <!-- Header Lockup -->
+        <div class="text-center mb-8">
+          <div class="w-16 h-16 rounded-2xl bg-[#214F36] text-[#F9B900] flex items-center justify-center mx-auto mb-4 shadow-lg">
+            <mat-icon class="text-3xl">admin_panel_settings</mat-icon>
+          </div>
+          <h1 class="text-2xl font-extrabold text-[#171717] tracking-tight">Admin Portal</h1>
+          <p class="text-xs text-neutral-500 mt-1">
+            M. Anass Portfolio Content Management
+          </p>
+        </div>
+
+        <!-- Security Notice -->
+        <div class="bg-emerald-50/80 border border-emerald-200/80 rounded-2xl p-3.5 mb-6 text-xs text-[#214F36] flex items-center gap-2.5">
+          <mat-icon class="text-[#214F36] text-lg shrink-0">lock</mat-icon>
+          <div class="leading-relaxed font-semibold">
+            Admin-Only Access: Please enter your credentials to log in.
+          </div>
+        </div>
+
+        <!-- Error Message -->
+        @if (loginError()) {
+          <div class="mb-5 p-3 rounded-xl bg-red-50 border border-red-200 text-red-700 text-xs font-semibold flex items-center gap-2">
+            <mat-icon class="text-sm">error</mat-icon>
+            <span>{{ loginError() }}</span>
+          </div>
+        }
+
+        <!-- Login Form (Email + Password) -->
+        <form [formGroup]="loginForm" (ngSubmit)="onLogin()" class="space-y-4">
+          <!-- Email Input -->
+          <div>
+            <label for="adminEmail" class="block text-xs font-bold text-neutral-700 uppercase tracking-wider mb-1.5">
+              Admin Email Address *
+            </label>
+            <div class="relative">
+              <input
+                id="adminEmail"
+                type="email"
+                formControlName="email"
+                placeholder="Enter your admin email"
+                class="w-full px-4 py-3 rounded-xl border border-neutral-300 bg-neutral-50 text-sm text-[#171717] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#214F36] transition-all"
+              />
+            </div>
+          </div>
+
+          <!-- Password Input -->
+          <div>
+            <label for="passcode" class="block text-xs font-bold text-neutral-700 uppercase tracking-wider mb-1.5">
+              Admin Password *
+            </label>
+            <div class="relative">
+              <input
+                id="passcode"
+                [type]="showPasscode() ? 'text' : 'password'"
+                formControlName="passcode"
+                placeholder="Enter your admin password"
+                class="w-full px-4 py-3 rounded-xl border border-neutral-300 bg-neutral-50 text-sm text-[#171717] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#214F36] transition-all pr-11"
+              />
+              <button
+                type="button"
+                (click)="showPasscode.set(!showPasscode())"
+                class="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-400 hover:text-neutral-700 cursor-pointer"
+                aria-label="Toggle password visibility"
+              >
+                <mat-icon class="text-lg">{{ showPasscode() ? 'visibility_off' : 'visibility' }}</mat-icon>
+              </button>
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            class="w-full bg-[#214F36] hover:bg-[#163625] text-white py-3.5 px-6 rounded-xl font-bold text-sm tracking-wide transition-all duration-200 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl cursor-pointer"
+          >
+            <span>Sign In to Admin Panel</span>
+            <mat-icon class="text-sm">login</mat-icon>
+          </button>
+        </form>
+
+        <!-- Back to Website Link -->
+        <div class="mt-6 text-center pt-4 border-t border-neutral-100">
+          <a
+            routerLink="/"
+            class="text-xs text-neutral-500 hover:text-[#214F36] font-medium flex items-center justify-center gap-1"
+          >
+            <mat-icon class="text-xs">arrow_back</mat-icon>
+            <span>Return to Live Website</span>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  } @else {
+
+    <!-- ======================== AUTHENTICATED ADMIN DASHBOARD ======================== -->
+    <div class="min-h-screen flex flex-col">
+
+      <!-- Top Header Navbar -->
+      <header class="bg-[#214F36] text-white sticky top-0 z-30 shadow-md border-b border-emerald-900/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-8 py-3.5 flex items-center justify-between gap-4">
+          
+          <!-- Brand Lockup -->
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-full bg-[#F9B900] text-[#171717] font-extrabold flex items-center justify-center text-sm shadow">
+              A
+            </div>
+            <div>
+              <div class="text-sm font-extrabold tracking-tight text-white flex items-center gap-2">
+                <span>M. Anass</span>
+                <span class="bg-[#F9B900] text-[#214F36] text-[10px] uppercase font-black px-2 py-0.5 rounded-full">
+                  Admin Panel
+                </span>
+              </div>
+              <div class="text-[11px] text-emerald-200/80">
+                Content Management System
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick Action Buttons -->
+          <div class="flex items-center gap-2.5 sm:gap-4">
+            <a
+              routerLink="/"
+              target="_blank"
+              class="bg-emerald-900/80 hover:bg-[#F9B900] hover:text-[#214F36] text-white px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 shadow-sm"
+              title="Open portfolio in new tab"
+            >
+              <mat-icon class="text-sm">visibility</mat-icon>
+              <span class="hidden sm:inline">View Live Website</span>
+            </a>
+
+            <button
+              (click)="onLogout()"
+              type="button"
+              class="bg-red-500/20 hover:bg-red-500 text-red-100 hover:text-white px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer"
+            >
+              <mat-icon class="text-sm">logout</mat-icon>
+              <span>Logout</span>
+            </button>
+          </div>
+
+        </div>
+      </header>
+
+      <!-- Main Admin Content Area -->
+      <main class="max-w-7xl mx-auto px-4 sm:px-8 py-8 w-full flex-1">
+
+        <!-- Top Title & Description -->
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
+          <div>
+            <h1 class="text-2xl sm:text-3xl font-extrabold text-[#171717] tracking-tight">
+              Website Management <span class="text-[#F9B900]">Dashboard</span>
+            </h1>
+            <p class="text-xs sm:text-sm text-neutral-500 mt-1">
+              Changes you save here reflect immediately on the live portfolio site.
+            </p>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <span class="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-700 bg-emerald-100/70 px-3 py-1.5 rounded-full border border-emerald-300/60">
+              <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+              <span>Live Reactive Sync Active</span>
+            </span>
+          </div>
+        </div>
+
+        <!-- Navigation Tabs Bar (Horizontal scrolling on small screens) -->
+        <div class="flex items-center gap-2 border-b border-neutral-200 pb-2 mb-8 overflow-x-auto no-scrollbar">
+          
+          <button
+            type="button"
+            (click)="activeTab.set('profile')"
+            class="px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all whitespace-nowrap flex items-center gap-2 cursor-pointer"
+            [class.bg-[#214F36]]="activeTab() === 'profile'"
+            [class.text-white]="activeTab() === 'profile'"
+            [class.shadow-md]="activeTab() === 'profile'"
+            [class.bg-white]="activeTab() !== 'profile'"
+            [class.text-neutral-600]="activeTab() !== 'profile'"
+            [class.hover:bg-neutral-100]="activeTab() !== 'profile'"
+          >
+            <mat-icon class="text-base">person</mat-icon>
+            <span>Profile & Contact</span>
+          </button>
+
+          <button
+            type="button"
+            (click)="activeTab.set('projects')"
+            class="px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all whitespace-nowrap flex items-center gap-2 cursor-pointer"
+            [class.bg-[#214F36]]="activeTab() === 'projects'"
+            [class.text-white]="activeTab() === 'projects'"
+            [class.shadow-md]="activeTab() === 'projects'"
+            [class.bg-white]="activeTab() !== 'projects'"
+            [class.text-neutral-600]="activeTab() !== 'projects'"
+            [class.hover:bg-neutral-100]="activeTab() !== 'projects'"
+          >
+            <mat-icon class="text-base">view_carousel</mat-icon>
+            <span>Projects ({{ portfolioData.projects().length }})</span>
+          </button>
+
+          <button
+            type="button"
+            (click)="activeTab.set('skills')"
+            class="px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all whitespace-nowrap flex items-center gap-2 cursor-pointer"
+            [class.bg-[#214F36]]="activeTab() === 'skills'"
+            [class.text-white]="activeTab() === 'skills'"
+            [class.shadow-md]="activeTab() === 'skills'"
+            [class.bg-white]="activeTab() !== 'skills'"
+            [class.text-neutral-600]="activeTab() !== 'skills'"
+            [class.hover:bg-neutral-100]="activeTab() !== 'skills'"
+          >
+            <mat-icon class="text-base">psychology</mat-icon>
+            <span>Skills & Tech Stack</span>
+          </button>
+
+          <button
+            type="button"
+            (click)="activeTab.set('services')"
+            class="px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all whitespace-nowrap flex items-center gap-2 cursor-pointer"
+            [class.bg-[#214F36]]="activeTab() === 'services'"
+            [class.text-white]="activeTab() === 'services'"
+            [class.shadow-md]="activeTab() === 'services'"
+            [class.bg-white]="activeTab() !== 'services'"
+            [class.text-neutral-600]="activeTab() !== 'services'"
+            [class.hover:bg-neutral-100]="activeTab() !== 'services'"
+          >
+            <mat-icon class="text-base">design_services</mat-icon>
+            <span>Services ({{ portfolioData.services().length }})</span>
+          </button>
+
+          <button
+            type="button"
+            (click)="activeTab.set('testimonials')"
+            class="px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all whitespace-nowrap flex items-center gap-2 cursor-pointer"
+            [class.bg-[#214F36]]="activeTab() === 'testimonials'"
+            [class.text-white]="activeTab() === 'testimonials'"
+            [class.shadow-md]="activeTab() === 'testimonials'"
+            [class.bg-white]="activeTab() !== 'testimonials'"
+            [class.text-neutral-600]="activeTab() !== 'testimonials'"
+            [class.hover:bg-neutral-100]="activeTab() !== 'testimonials'"
+          >
+            <mat-icon class="text-base">format_quote</mat-icon>
+            <span>Testimonials</span>
+          </button>
+
+          <button
+            type="button"
+            (click)="activeTab.set('security')"
+            class="px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all whitespace-nowrap flex items-center gap-2 cursor-pointer"
+            [class.bg-[#214F36]]="activeTab() === 'security'"
+            [class.text-white]="activeTab() === 'security'"
+            [class.shadow-md]="activeTab() === 'security'"
+            [class.bg-white]="activeTab() !== 'security'"
+            [class.text-neutral-600]="activeTab() !== 'security'"
+            [class.hover:bg-neutral-100]="activeTab() !== 'security'"
+          >
+            <mat-icon class="text-base">security</mat-icon>
+            <span>Security & Reset</span>
+          </button>
+
+        </div>
+
+        <!-- ==================== TAB 1: PROFILE & CONTACT ==================== -->
+        @if (activeTab() === 'profile') {
+          <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-neutral-200/80">
+            
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-4 border-b border-neutral-100">
+              <div>
+                <h2 class="text-xl font-bold text-[#171717]">Personal Details & Contact Info</h2>
+                <p class="text-xs text-neutral-500">Edit phone number, email, WhatsApp, and hero copy.</p>
+              </div>
+              <button
+                (click)="saveProfile()"
+                type="button"
+                class="bg-[#214F36] hover:bg-[#163625] text-white px-6 py-2.5 rounded-xl text-xs font-bold transition-colors flex items-center gap-2 shadow-md cursor-pointer self-start sm:self-auto"
+              >
+                <mat-icon class="text-sm">save</mat-icon>
+                <span>Save All Profile Changes</span>
+              </button>
+            </div>
+
+            <form [formGroup]="profileForm" (ngSubmit)="saveProfile()" class="space-y-6">
+              
+              <!-- Contact Information Row -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                <div>
+                  <label for="profPhone" class="block text-xs font-bold text-neutral-700 uppercase tracking-wider mb-1.5">
+                    Phone Number (Calls) *
+                  </label>
+                  <input
+                    id="profPhone"
+                    type="text"
+                    formControlName="phone"
+                    placeholder="+92 3015539449"
+                    class="w-full px-4 py-2.5 rounded-xl border border-neutral-300 bg-neutral-50 text-sm text-[#171717] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#214F36]"
+                  />
+                  <span class="text-[11px] text-neutral-400 mt-1 block">Displayed in Contact section & CV</span>
+                </div>
+
+                <div>
+                  <label for="profWhatsapp" class="block text-xs font-bold text-neutral-700 uppercase tracking-wider mb-1.5">
+                    WhatsApp Number *
+                  </label>
+                  <input
+                    id="profWhatsapp"
+                    type="text"
+                    formControlName="whatsapp"
+                    placeholder="+92 3015539449"
+                    class="w-full px-4 py-2.5 rounded-xl border border-neutral-300 bg-neutral-50 text-sm text-[#171717] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#214F36]"
+                  />
+                  <span class="text-[11px] text-neutral-400 mt-1 block">Used for direct wa.me chat link</span>
+                </div>
+
+                <div>
+                  <label for="profEmail" class="block text-xs font-bold text-neutral-700 uppercase tracking-wider mb-1.5">
+                    Email Address *
+                  </label>
+                  <input
+                    id="profEmail"
+                    type="email"
+                    formControlName="email"
+                    placeholder="info.developer62@gmail.com"
+                    class="w-full px-4 py-2.5 rounded-xl border border-neutral-300 bg-neutral-50 text-sm text-[#171717] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#214F36]"
+                  />
+                  <span class="text-[11px] text-neutral-400 mt-1 block">Displayed in navbar, footer, and contact</span>
+                </div>
+
+                <div>
+                  <label for="profName" class="block text-xs font-bold text-neutral-700 uppercase tracking-wider mb-1.5">
+                    Full Name *
+                  </label>
+                  <input
+                    id="profName"
+                    type="text"
+                    formControlName="name"
+                    placeholder="M. Anass"
+                    class="w-full px-4 py-2.5 rounded-xl border border-neutral-300 bg-neutral-50 text-sm text-[#171717] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#214F36]"
+                  />
+                </div>
+
+                <div>
+                  <label for="profRole" class="block text-xs font-bold text-neutral-700 uppercase tracking-wider mb-1.5">
+                    Professional Role / Title *
+                  </label>
+                  <input
+                    id="profRole"
+                    type="text"
+                    formControlName="role"
+                    placeholder="Web Developer"
+                    class="w-full px-4 py-2.5 rounded-xl border border-neutral-300 bg-neutral-50 text-sm text-[#171717] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#214F36]"
+                  />
+                </div>
+
+                <div>
+                  <label for="profLocation" class="block text-xs font-bold text-neutral-700 uppercase tracking-wider mb-1.5">
+                    Location *
+                  </label>
+                  <input
+                    id="profLocation"
+                    type="text"
+                    formControlName="location"
+                    placeholder="Pakistan (Serving Worldwide)"
+                    class="w-full px-4 py-2.5 rounded-xl border border-neutral-300 bg-neutral-50 text-sm text-[#171717] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#214F36]"
+                  />
+                </div>
+              </div>
+
+              <!-- Stats Counters -->
+              <div class="pt-4 border-t border-neutral-100">
+                <h3 class="text-sm font-bold text-neutral-800 uppercase tracking-wider mb-3">
+                  Achievement Stats Counters
+                </h3>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
+                  <div>
+                    <label for="statProjects" class="block text-xs font-semibold text-neutral-600 mb-1">
+                      Projects Completed
+                    </label>
+                    <input
+                      id="statProjects"
+                      type="text"
+                      formControlName="projectsCount"
+                      placeholder="50+"
+                      class="w-full px-4 py-2 rounded-xl border border-neutral-300 bg-neutral-50 text-sm text-[#171717] focus:bg-white"
+                    />
+                  </div>
+                  <div>
+                    <label for="statTech" class="block text-xs font-semibold text-neutral-600 mb-1">
+                      Technologies Mastered
+                    </label>
+                    <input
+                      id="statTech"
+                      type="text"
+                      formControlName="technologiesCount"
+                      placeholder="10+"
+                      class="w-full px-4 py-2 rounded-xl border border-neutral-300 bg-neutral-50 text-sm text-[#171717] focus:bg-white"
+                    />
+                  </div>
+                  <div>
+                    <label for="statSatisfy" class="block text-xs font-semibold text-neutral-600 mb-1">
+                      Client Satisfaction Rate
+                    </label>
+                    <input
+                      id="statSatisfy"
+                      type="text"
+                      formControlName="satisfactionRate"
+                      placeholder="100%"
+                      class="w-full px-4 py-2 rounded-xl border border-neutral-300 bg-neutral-50 text-sm text-[#171717] focus:bg-white"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <!-- Hero & Bio Copy -->
+              <div class="pt-4 border-t border-neutral-100 space-y-4">
+                <h3 class="text-sm font-bold text-neutral-800 uppercase tracking-wider">
+                  Hero Section & About Copy
+                </h3>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                  <div>
+                    <label for="heroGreeting" class="block text-xs font-semibold text-neutral-600 mb-1">
+                      Hero Greeting Tag
+                    </label>
+                    <input
+                      id="heroGreeting"
+                      type="text"
+                      formControlName="heroGreeting"
+                      placeholder="Hello There!"
+                      class="w-full px-4 py-2 rounded-xl border border-neutral-300 bg-neutral-50 text-sm text-[#171717] focus:bg-white"
+                    />
+                  </div>
+
+                  <div>
+                    <label for="statusText" class="block text-xs font-semibold text-neutral-600 mb-1">
+                      Availability Status Pill
+                    </label>
+                    <input
+                      id="statusText"
+                      type="text"
+                      formControlName="statusText"
+                      placeholder="Available for Freelance Projects & Remote Roles"
+                      class="w-full px-4 py-2 rounded-xl border border-neutral-300 bg-neutral-50 text-sm text-[#171717] focus:bg-white"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label for="heroSubtitle" class="block text-xs font-semibold text-neutral-600 mb-1">
+                    Hero Subtitle
+                  </label>
+                  <textarea
+                    id="heroSubtitle"
+                    formControlName="heroSubtitle"
+                    rows="2"
+                    class="w-full px-4 py-2 rounded-xl border border-neutral-300 bg-neutral-50 text-sm text-[#171717] focus:bg-white resize-none"
+                  ></textarea>
+                </div>
+
+                <div>
+                  <label for="aboutBio1" class="block text-xs font-semibold text-neutral-600 mb-1">
+                    About Me Paragraph 1
+                  </label>
+                  <textarea
+                    id="aboutBio1"
+                    formControlName="aboutBio1"
+                    rows="2"
+                    class="w-full px-4 py-2 rounded-xl border border-neutral-300 bg-neutral-50 text-sm text-[#171717] focus:bg-white resize-none"
+                  ></textarea>
+                </div>
+
+                <div>
+                  <label for="aboutBio2" class="block text-xs font-semibold text-neutral-600 mb-1">
+                    About Me Paragraph 2
+                  </label>
+                  <textarea
+                    id="aboutBio2"
+                    formControlName="aboutBio2"
+                    rows="2"
+                    class="w-full px-4 py-2 rounded-xl border border-neutral-300 bg-neutral-50 text-sm text-[#171717] focus:bg-white resize-none"
+                  ></textarea>
+                </div>
+              </div>
+
+              <!-- Save Profile Button -->
+              <div class="pt-4 flex justify-end">
+                <button
+                  type="submit"
+                  class="bg-[#214F36] hover:bg-[#163625] text-white px-8 py-3 rounded-xl text-xs font-bold transition-colors flex items-center gap-2 shadow-lg cursor-pointer"
+                >
+                  <mat-icon class="text-sm">save</mat-icon>
+                  <span>Save All Profile Changes</span>
+                </button>
+              </div>
+
+            </form>
+          </div>
+        }
+
+        <!-- ==================== TAB 2: PROJECTS MANAGER ==================== -->
+        @if (activeTab() === 'projects') {
+          <div class="space-y-6">
+            
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white rounded-3xl p-6 shadow-sm border border-neutral-200/80">
+              <div>
+                <h2 class="text-xl font-bold text-[#171717]">Projects Management</h2>
+                <p class="text-xs text-neutral-500">
+                  Update live project URLs (SoleCraft, Hassan Dental, Turkish Restaurant, Apex Business) or add new work.
+                </p>
+              </div>
+
+              <button
+                (click)="openAddProject()"
+                type="button"
+                class="bg-[#214F36] hover:bg-[#163625] text-white px-5 py-2.5 rounded-xl text-xs font-bold transition-colors flex items-center gap-2 shadow-md cursor-pointer self-start sm:self-auto"
+              >
+                <mat-icon class="text-sm">add_circle</mat-icon>
+                <span>Add New Project</span>
+              </button>
+            </div>
+
+            <!-- Project Cards List -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              @for (project of portfolioData.projects(); track project.id) {
+                <div class="bg-white rounded-3xl overflow-hidden border border-neutral-200/80 shadow-sm flex flex-col justify-between group hover:shadow-lg transition-all">
+                  
+                  <div>
+                    <!-- Project Preview Header -->
+                    <div class="relative aspect-video bg-neutral-100 overflow-hidden">
+                      <img
+                        [src]="project.image"
+                        [alt]="project.title"
+                        referrerpolicy="no-referrer"
+                        class="w-full h-full object-cover object-top"
+                      />
+                      <span class="absolute top-3 left-3 bg-[#214F36] text-white text-[11px] font-bold px-2.5 py-1 rounded-full uppercase shadow">
+                        {{ project.category }}
+                      </span>
+                    </div>
+
+                    <div class="p-6">
+                      <div class="flex items-center justify-between gap-2 mb-2">
+                        <h3 class="text-lg font-bold text-[#171717]">{{ project.title }}</h3>
+                        <span class="text-[11px] font-bold text-emerald-800 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200 shrink-0">
+                          {{ project.metrics }}
+                        </span>
+                      </div>
+
+                      <p class="text-xs text-neutral-600 line-clamp-2 mb-4">
+                        {{ project.description }}
+                      </p>
+
+                      <!-- Live URL Display -->
+                      <div class="bg-neutral-50 p-2.5 rounded-xl text-[11px] font-mono text-neutral-600 break-all mb-4 flex items-center gap-1.5 border border-neutral-200/60">
+                        <mat-icon class="text-xs text-neutral-400 shrink-0">link</mat-icon>
+                        <span class="truncate">{{ project.liveUrl }}</span>
+                      </div>
+
+                      <!-- Tech Tags -->
+                      <div class="flex flex-wrap gap-1.5">
+                        @for (tech of project.technologies; track tech) {
+                          <span class="text-[10px] bg-neutral-100 text-neutral-700 font-semibold px-2 py-0.5 rounded-md">
+                            {{ tech }}
+                          </span>
+                        }
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Edit / Delete Actions -->
+                  <div class="p-4 bg-neutral-50/70 border-t border-neutral-100 flex items-center gap-2">
+                    <button
+                      (click)="editProject(project)"
+                      type="button"
+                      class="flex-1 bg-white hover:bg-neutral-100 text-[#171717] border border-neutral-300 py-2 px-3 rounded-xl text-xs font-bold transition-colors flex items-center justify-center gap-1.5 cursor-pointer shadow-sm"
+                    >
+                      <mat-icon class="text-xs">edit</mat-icon>
+                      <span>Edit Details</span>
+                    </button>
+
+                    <a
+                      [href]="project.liveUrl"
+                      target="_blank"
+                      class="bg-emerald-50 hover:bg-emerald-100 text-[#214F36] py-2 px-3 rounded-xl text-xs font-bold transition-colors flex items-center justify-center gap-1 cursor-pointer"
+                      title="Open Live URL"
+                    >
+                      <mat-icon class="text-xs">open_in_new</mat-icon>
+                    </a>
+
+                    <button
+                      (click)="deleteProject(project.id, project.title)"
+                      type="button"
+                      class="bg-red-50 hover:bg-red-100 text-red-600 py-2 px-3 rounded-xl text-xs font-bold transition-colors flex items-center justify-center gap-1 cursor-pointer"
+                      title="Delete Project"
+                    >
+                      <mat-icon class="text-xs">delete</mat-icon>
+                    </button>
+                  </div>
+
+                </div>
+              }
+            </div>
+
+          </div>
+        }
+
+        <!-- ==================== TAB 3: SKILLS & TECH STACK ==================== -->
+        @if (activeTab() === 'skills') {
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            
+            <!-- Skills List (Left 8 cols) -->
+            <div class="lg:col-span-8 bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-neutral-200/80">
+              <h2 class="text-xl font-bold text-[#171717] mb-1">Current Skills ({{ portfolioData.skills().length }})</h2>
+              <p class="text-xs text-neutral-500 mb-6">Manage proficiency ratings and technical stack.</p>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                @for (skill of portfolioData.skills(); track skill.name) {
+                  <div class="bg-neutral-50 p-4 rounded-2xl border border-neutral-200/70 flex items-center justify-between gap-3 group">
+                    <div class="flex items-center gap-3">
+                      <div class="w-10 h-10 rounded-xl bg-[#214F36] text-[#F9B900] flex items-center justify-center shrink-0">
+                        <mat-icon class="text-lg">{{ skill.iconName }}</mat-icon>
+                      </div>
+                      <div>
+                        <div class="text-sm font-bold text-[#171717]">{{ skill.name }}</div>
+                        <div class="text-[11px] text-neutral-500 uppercase">{{ skill.category }} · {{ skill.level }}%</div>
+                      </div>
+                    </div>
+
+                    <button
+                      (click)="deleteSkill(skill.name)"
+                      type="button"
+                      class="text-neutral-400 hover:text-red-500 p-1 transition-colors cursor-pointer"
+                      title="Remove skill"
+                    >
+                      <mat-icon class="text-base">delete</mat-icon>
+                    </button>
+                  </div>
+                }
+              </div>
+            </div>
+
+            <!-- Add Skill Form (Right 4 cols) -->
+            <div class="lg:col-span-4 bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-neutral-200/80 self-start">
+              <h3 class="text-lg font-bold text-[#171717] mb-1">Add New Skill</h3>
+              <p class="text-xs text-neutral-500 mb-5">Expand your portfolio technical showcase.</p>
+
+              <form [formGroup]="skillForm" (ngSubmit)="addSkill()" class="space-y-4">
+                <div>
+                  <label for="skillName" class="block text-xs font-bold text-neutral-700 uppercase mb-1">
+                    Skill Name *
+                  </label>
+                  <input
+                    id="skillName"
+                    type="text"
+                    formControlName="name"
+                    placeholder="e.g. Next.js, Node.js, Python"
+                    class="w-full px-3.5 py-2.5 rounded-xl border border-neutral-300 bg-neutral-50 text-xs focus:bg-white"
+                  />
+                </div>
+
+                <div>
+                  <label for="skillCat" class="block text-xs font-bold text-neutral-700 uppercase mb-1">
+                    Category
+                  </label>
+                  <select
+                    id="skillCat"
+                    formControlName="category"
+                    class="w-full px-3.5 py-2.5 rounded-xl border border-neutral-300 bg-neutral-50 text-xs focus:bg-white"
+                  >
+                    <option value="frontend">Frontend Development</option>
+                    <option value="styling">Styling & UI</option>
+                    <option value="tools">Tools & DevOps</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label for="skillLevel" class="block text-xs font-bold text-neutral-700 uppercase mb-1">
+                    Proficiency ({{ skillForm.get('level')?.value }}%)
+                  </label>
+                  <input
+                    id="skillLevel"
+                    type="range"
+                    min="50"
+                    max="100"
+                    formControlName="level"
+                    class="w-full accent-[#214F36]"
+                  />
+                </div>
+
+                <div>
+                  <label for="skillIcon" class="block text-xs font-bold text-neutral-700 uppercase mb-1">
+                    Material Icon Name
+                  </label>
+                  <input
+                    id="skillIcon"
+                    type="text"
+                    formControlName="iconName"
+                    placeholder="e.g. code, devices, memory"
+                    class="w-full px-3.5 py-2.5 rounded-xl border border-neutral-300 bg-neutral-50 text-xs focus:bg-white"
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  class="w-full bg-[#214F36] hover:bg-[#163625] text-white py-3 rounded-xl text-xs font-bold transition-colors flex items-center justify-center gap-1.5 shadow-md cursor-pointer"
+                >
+                  <mat-icon class="text-sm">add</mat-icon>
+                  <span>Add to Tech Stack</span>
+                </button>
+              </form>
+            </div>
+
+          </div>
+        }
+
+        <!-- ==================== TAB 4: SERVICES ==================== -->
+        @if (activeTab() === 'services') {
+          <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-neutral-200/80">
+            <h2 class="text-xl font-bold text-[#171717] mb-1">Services Offered</h2>
+            <p class="text-xs text-neutral-500 mb-6">Review the services displayed on your live site.</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              @for (svc of portfolioData.services(); track svc.id) {
+                <div class="p-6 rounded-2xl bg-neutral-50 border border-neutral-200/70 flex flex-col justify-between">
+                  <div>
+                    <div class="flex items-center gap-3 mb-3">
+                      <div class="w-10 h-10 rounded-xl bg-[#214F36] text-[#F9B900] flex items-center justify-center shrink-0">
+                        <mat-icon class="text-lg">{{ svc.icon }}</mat-icon>
+                      </div>
+                      <h3 class="text-base font-bold text-[#171717]">{{ svc.title }}</h3>
+                    </div>
+                    <p class="text-xs text-neutral-600 mb-4">{{ svc.shortDesc }}</p>
+
+                    <div class="text-[11px] font-bold text-neutral-500 uppercase tracking-wider mb-2">Deliverables:</div>
+                    <ul class="space-y-1 mb-4">
+                      @for (deliv of svc.deliverables; track deliv) {
+                        <li class="text-xs text-neutral-700 flex items-center gap-1.5">
+                          <mat-icon class="text-emerald-700 text-xs">check</mat-icon>
+                          <span>{{ deliv }}</span>
+                        </li>
+                      }
+                    </ul>
+                  </div>
+                </div>
+              }
+            </div>
+          </div>
+        }
+
+        <!-- ==================== TAB 5: TESTIMONIALS ==================== -->
+        @if (activeTab() === 'testimonials') {
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            
+            <div class="lg:col-span-8 bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-neutral-200/80">
+              <h2 class="text-xl font-bold text-[#171717] mb-1">Client Testimonials</h2>
+              <p class="text-xs text-neutral-500 mb-6">Reviews displayed on your social proof section.</p>
+
+              <div class="space-y-4">
+                @for (t of portfolioData.testimonials(); track t.name) {
+                  <div class="p-5 rounded-2xl bg-neutral-50 border border-neutral-200/70 flex flex-col sm:flex-row items-start justify-between gap-4">
+                    <div class="flex items-start gap-3.5">
+                      <img
+                        [src]="t.avatar"
+                        [alt]="t.name"
+                        referrerpolicy="no-referrer"
+                        class="w-12 h-12 rounded-full object-cover border-2 border-[#214F36] shrink-0"
+                      />
+                      <div>
+                        <div class="text-sm font-bold text-[#171717]">{{ t.name }}</div>
+                        <div class="text-xs text-neutral-500">{{ t.role }} · <span class="text-[#214F36] font-semibold">{{ t.company }}</span></div>
+                        <div class="text-xs text-amber-500 my-1">★★★★★</div>
+                        <p class="text-xs text-neutral-600 italic">"{{ t.review }}"</p>
+                      </div>
+                    </div>
+
+                    <button
+                      (click)="deleteTestimonial(t.name)"
+                      type="button"
+                      class="text-neutral-400 hover:text-red-500 p-1.5 transition-colors cursor-pointer self-end sm:self-start"
+                      title="Delete review"
+                    >
+                      <mat-icon class="text-base">delete</mat-icon>
+                    </button>
+                  </div>
+                }
+              </div>
+            </div>
+
+            <!-- Add Review Form -->
+            <div class="lg:col-span-4 bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-neutral-200/80 self-start">
+              <h3 class="text-lg font-bold text-[#171717] mb-1">Add Client Review</h3>
+              <p class="text-xs text-neutral-500 mb-5">Add a new verified testimonial.</p>
+
+              <form [formGroup]="testimonialForm" (ngSubmit)="addTestimonial()" class="space-y-4">
+                <div>
+                  <label for="tName" class="block text-xs font-bold text-neutral-700 uppercase mb-1">Client Name *</label>
+                  <input
+                    id="tName"
+                    type="text"
+                    formControlName="name"
+                    placeholder="e.g. John Doe"
+                    class="w-full px-3.5 py-2.5 rounded-xl border border-neutral-300 bg-neutral-50 text-xs focus:bg-white"
+                  />
+                </div>
+
+                <div>
+                  <label for="tRole" class="block text-xs font-bold text-neutral-700 uppercase mb-1">Role / Designation *</label>
+                  <input
+                    id="tRole"
+                    type="text"
+                    formControlName="role"
+                    placeholder="e.g. Founder, CEO"
+                    class="w-full px-3.5 py-2.5 rounded-xl border border-neutral-300 bg-neutral-50 text-xs focus:bg-white"
+                  />
+                </div>
+
+                <div>
+                  <label for="tCompany" class="block text-xs font-bold text-neutral-700 uppercase mb-1">Company / Brand *</label>
+                  <input
+                    id="tCompany"
+                    type="text"
+                    formControlName="company"
+                    placeholder="e.g. Acme Studio"
+                    class="w-full px-3.5 py-2.5 rounded-xl border border-neutral-300 bg-neutral-50 text-xs focus:bg-white"
+                  />
+                </div>
+
+                <div>
+                  <label for="tReview" class="block text-xs font-bold text-neutral-700 uppercase mb-1">Review Quote *</label>
+                  <textarea
+                    id="tReview"
+                    formControlName="review"
+                    rows="3"
+                    placeholder="Client's review comment..."
+                    class="w-full px-3.5 py-2.5 rounded-xl border border-neutral-300 bg-neutral-50 text-xs focus:bg-white resize-none"
+                  ></textarea>
+                </div>
+
+                <button
+                  type="submit"
+                  class="w-full bg-[#214F36] hover:bg-[#163625] text-white py-3 rounded-xl text-xs font-bold transition-colors flex items-center justify-center gap-1.5 shadow-md cursor-pointer"
+                >
+                  <mat-icon class="text-sm">add</mat-icon>
+                  <span>Publish Review</span>
+                </button>
+              </form>
+            </div>
+
+          </div>
+        }
+
+        <!-- ==================== TAB 6: SECURITY & RESET ==================== -->
+        @if (activeTab() === 'security') {
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            
+            <!-- Change Passcode Box -->
+            <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-neutral-200/80">
+              <div class="flex items-center gap-3 mb-4">
+                <div class="w-10 h-10 rounded-xl bg-[#214F36] text-[#F9B900] flex items-center justify-center">
+                  <mat-icon class="text-xl">key</mat-icon>
+                </div>
+                <div>
+                  <h3 class="text-lg font-bold text-[#171717]">Change Admin Passcode</h3>
+                  <p class="text-xs text-neutral-500">Update the secret password used to access this admin panel.</p>
+                </div>
+              </div>
+
+              <form [formGroup]="securityForm" (ngSubmit)="changePassword()" class="space-y-4">
+                <div>
+                  <label for="currPass" class="block text-xs font-bold text-neutral-700 uppercase mb-1">
+                    Current Passcode *
+                  </label>
+                  <input
+                    id="currPass"
+                    type="password"
+                    formControlName="currentPass"
+                    placeholder="Enter current passcode"
+                    class="w-full px-4 py-2.5 rounded-xl border border-neutral-300 bg-neutral-50 text-sm focus:bg-white"
+                  />
+                </div>
+
+                <div>
+                  <label for="newPass" class="block text-xs font-bold text-neutral-700 uppercase mb-1">
+                    New Passcode (min 4 characters) *
+                  </label>
+                  <input
+                    id="newPass"
+                    type="password"
+                    formControlName="newPass"
+                    placeholder="Enter new strong passcode"
+                    class="w-full px-4 py-2.5 rounded-xl border border-neutral-300 bg-neutral-50 text-sm focus:bg-white"
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  class="bg-[#214F36] hover:bg-[#163625] text-white py-2.5 px-6 rounded-xl text-xs font-bold transition-colors flex items-center gap-2 cursor-pointer shadow-md"
+                >
+                  <mat-icon class="text-sm">lock_reset</mat-icon>
+                  <span>Update Passcode</span>
+                </button>
+              </form>
+            </div>
+
+            <!-- Reset to Defaults Box -->
+            <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-neutral-200/80 flex flex-col justify-between">
+              <div>
+                <div class="flex items-center gap-3 mb-4">
+                  <div class="w-10 h-10 rounded-xl bg-red-100 text-red-600 flex items-center justify-center">
+                    <mat-icon class="text-xl">restart_alt</mat-icon>
+                  </div>
+                  <div>
+                    <h3 class="text-lg font-bold text-red-700">Restore Original Defaults</h3>
+                    <p class="text-xs text-neutral-500">Reset portfolio data to its initial pristine state.</p>
+                  </div>
+                </div>
+
+                <div class="bg-red-50 border border-red-200/80 rounded-2xl p-4 text-xs text-red-800 mb-6 leading-relaxed">
+                  <p class="font-bold mb-1">Caution:</p>
+                  This will reset the phone number back to <strong>+92 3015539449</strong>, restore the 4 featured projects (SoleCraft, Hassan Dental Clinic, Turkish Restaurant, Apex Business Demo), and restore all initial skills and stats.
+                </div>
+              </div>
+
+              <button
+                (click)="resetAll()"
+                type="button"
+                class="bg-red-600 hover:bg-red-700 text-white py-3 px-6 rounded-xl text-xs font-bold transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-md"
+              >
+                <mat-icon class="text-sm">restore</mat-icon>
+                <span>Reset Entire Website to Defaults</span>
+              </button>
+            </div>
+
+          </div>
+        }
+
+      </main>
+
+      <!-- Footer Bar -->
+      <footer class="bg-white border-t border-neutral-200 py-4 px-4 sm:px-8 text-center text-xs text-neutral-500">
+        M. Anass Admin Panel · Safe and secure local state management · All changes reflect in real-time
+      </footer>
+
+    </div>
+
+    <!-- ==================== PROJECT EDIT/ADD MODAL ==================== -->
+    @if (showNewProjectModal()) {
+      <div
+        class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto"
+        role="dialog"
+        aria-modal="true"
+      >
+        <button
+          type="button"
+          (click)="showNewProjectModal.set(false)"
+          class="fixed inset-0 bg-black/70 backdrop-blur-sm cursor-default w-full h-full border-0 focus:outline-none"
+          aria-label="Close dialog"
+        ></button>
+
+        <div class="bg-white rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl relative z-10 my-8 flex flex-col max-h-[90vh]">
+          
+          <div class="flex items-center justify-between pb-4 border-b border-neutral-100 mb-5">
+            <h3 class="text-lg font-bold text-[#171717]">
+              {{ editingProject() ? 'Edit Project: ' + editingProject()?.title : 'Add New Featured Project' }}
+            </h3>
+            <button
+              (click)="showNewProjectModal.set(false)"
+              type="button"
+              class="w-8 h-8 rounded-full bg-neutral-100 hover:bg-neutral-200 text-neutral-600 flex items-center justify-center transition-colors"
+            >
+              <mat-icon class="text-base">close</mat-icon>
+            </button>
+          </div>
+
+          <form [formGroup]="projectForm" (ngSubmit)="saveProject()" class="space-y-4 overflow-y-auto pr-1 flex-1">
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label for="projTitle" class="block text-xs font-bold text-neutral-700 uppercase mb-1">
+                  Project Title *
+                </label>
+                <input
+                  id="projTitle"
+                  type="text"
+                  formControlName="title"
+                  placeholder="e.g. SoleCraft E-Commerce Store"
+                  class="w-full px-3.5 py-2.5 rounded-xl border border-neutral-300 bg-neutral-50 text-xs focus:bg-white"
+                />
+              </div>
+
+              <div>
+                <label for="projCat" class="block text-xs font-bold text-neutral-700 uppercase mb-1">
+                  Category *
+                </label>
+                <select
+                  id="projCat"
+                  formControlName="category"
+                  class="w-full px-3.5 py-2.5 rounded-xl border border-neutral-300 bg-neutral-50 text-xs focus:bg-white"
+                >
+                  <option value="web">Web Application</option>
+                  <option value="ecommerce">E-Commerce</option>
+                  <option value="business">Business & Agency</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label for="projUrl" class="block text-xs font-bold text-neutral-700 uppercase mb-1">
+                  Live URL / Link *
+                </label>
+                <input
+                  id="projUrl"
+                  type="text"
+                  formControlName="liveUrl"
+                  placeholder="https://solecraft-chi.vercel.app or /business-demo"
+                  class="w-full px-3.5 py-2.5 rounded-xl border border-neutral-300 bg-neutral-50 text-xs focus:bg-white font-mono"
+                />
+              </div>
+
+              <div>
+                <label for="projMetrics" class="block text-xs font-bold text-neutral-700 uppercase mb-1">
+                  Badge / Metrics *
+                </label>
+                <input
+                  id="projMetrics"
+                  type="text"
+                  formControlName="metrics"
+                  placeholder="e.g. Live on Vercel · +65% Bookings"
+                  class="w-full px-3.5 py-2.5 rounded-xl border border-neutral-300 bg-neutral-50 text-xs focus:bg-white"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label for="projDesc" class="block text-xs font-bold text-neutral-700 uppercase mb-1">
+                Short Summary (Card preview) *
+              </label>
+              <textarea
+                id="projDesc"
+                formControlName="description"
+                rows="2"
+                placeholder="Brief 1-2 sentence description..."
+                class="w-full px-3.5 py-2 rounded-xl border border-neutral-300 bg-neutral-50 text-xs focus:bg-white resize-none"
+              ></textarea>
+            </div>
+
+            <div>
+              <label for="projDetails" class="block text-xs font-bold text-neutral-700 uppercase mb-1">
+                Full Details (Modal case study) *
+              </label>
+              <textarea
+                id="projDetails"
+                formControlName="fullDetails"
+                rows="3"
+                placeholder="Detailed case study breakdown..."
+                class="w-full px-3.5 py-2 rounded-xl border border-neutral-300 bg-neutral-50 text-xs focus:bg-white resize-none"
+              ></textarea>
+            </div>
+
+            <div>
+              <label for="projTech" class="block text-xs font-bold text-neutral-700 uppercase mb-1">
+                Technologies (comma separated) *
+              </label>
+              <input
+                id="projTech"
+                type="text"
+                formControlName="technologies"
+                placeholder="Next.js, React, Tailwind CSS, Vercel"
+                class="w-full px-3.5 py-2.5 rounded-xl border border-neutral-300 bg-neutral-50 text-xs focus:bg-white"
+              />
+            </div>
+
+            <div>
+              <label for="projImage" class="block text-xs font-bold text-neutral-700 uppercase mb-1">
+                Image URL or Path *
+              </label>
+              <input
+                id="projImage"
+                type="text"
+                formControlName="image"
+                placeholder="/assets/images/... or https://..."
+                class="w-full px-3.5 py-2.5 rounded-xl border border-neutral-300 bg-neutral-50 text-xs focus:bg-white font-mono"
+              />
+            </div>
+
+            <div>
+              <label for="projFeat" class="block text-xs font-bold text-neutral-700 uppercase mb-1">
+                Key Features (one per line)
+              </label>
+              <textarea
+                id="projFeat"
+                formControlName="features"
+                rows="3"
+                placeholder="Feature 1&#10;Feature 2&#10;Feature 3"
+                class="w-full px-3.5 py-2 rounded-xl border border-neutral-300 bg-neutral-50 text-xs focus:bg-white font-mono resize-none"
+              ></textarea>
+            </div>
+
+            <div class="pt-4 border-t border-neutral-100 flex items-center justify-end gap-3">
+              <button
+                type="button"
+                (click)="showNewProjectModal.set(false)"
+                class="px-5 py-2.5 rounded-xl border border-neutral-300 text-xs font-bold text-neutral-700 hover:bg-neutral-100 transition-colors"
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                class="bg-[#214F36] hover:bg-[#163625] text-white px-6 py-2.5 rounded-xl text-xs font-bold transition-colors flex items-center gap-1.5 shadow-md cursor-pointer"
+              >
+                <mat-icon class="text-xs">save</mat-icon>
+                <span>Save Project</span>
+              </button>
+            </div>
+
+          </form>
+
+        </div>
+      </div>
+    }
+
+  }
+
+</div>
